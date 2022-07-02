@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Gateway", "LintCoder.Gateway\LintCoder.Gateway.csproj", "{16D27891-3F77-4464-AED9-E271D453698C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{02E8DE51-2958-4529-B78B-5F33819C8889}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{0F3FACC0-7DC4-4BBB-A7FA-245A722B70AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{8713CC41-6B6B-497B-97AC-B84E0050080B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{37F7BCD7-2E30-48B2-AD32-1BD7F31B969D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Identity.API", "LintCoder.Identity.API\LintCoder.Identity.API.csproj", "{A95E6A48-6CBD-4F0C-A51A-ECA760A3D483}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9ECC9F96-6825-40B6-A2A0-7AC4935EE289}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lintcoder.Base", "Lintcoder.Base\Lintcoder.Base.csproj", "{1C46AAD0-4A35-4EE4-846F-CFB8342F01D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D93A597-3B8A-4B1F-A18C-14247724D8E5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16D27891-3F77-4464-AED9-E271D453698C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16D27891-3F77-4464-AED9-E271D453698C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16D27891-3F77-4464-AED9-E271D453698C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16D27891-3F77-4464-AED9-E271D453698C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A95E6A48-6CBD-4F0C-A51A-ECA760A3D483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A95E6A48-6CBD-4F0C-A51A-ECA760A3D483}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A95E6A48-6CBD-4F0C-A51A-ECA760A3D483}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A95E6A48-6CBD-4F0C-A51A-ECA760A3D483}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C46AAD0-4A35-4EE4-846F-CFB8342F01D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C46AAD0-4A35-4EE4-846F-CFB8342F01D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C46AAD0-4A35-4EE4-846F-CFB8342F01D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C46AAD0-4A35-4EE4-846F-CFB8342F01D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{16D27891-3F77-4464-AED9-E271D453698C} = {02E8DE51-2958-4529-B78B-5F33819C8889}
+		{37F7BCD7-2E30-48B2-AD32-1BD7F31B969D} = {0F3FACC0-7DC4-4BBB-A7FA-245A722B70AC}
+		{A95E6A48-6CBD-4F0C-A51A-ECA760A3D483} = {37F7BCD7-2E30-48B2-AD32-1BD7F31B969D}
+		{1C46AAD0-4A35-4EE4-846F-CFB8342F01D1} = {8713CC41-6B6B-497B-97AC-B84E0050080B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {301A9A64-9B60-49E8-9532-D2BBD210C4AD}
+	EndGlobalSection
+EndGlobal
