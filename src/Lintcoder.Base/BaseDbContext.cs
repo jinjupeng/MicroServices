@@ -6,13 +6,8 @@ namespace Lintcoder.Base
 {
     public class BaseDbContext : DbContext
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public BaseDbContext(DbContextOptions options, IHttpContextAccessor httpContextAccessor) : base(options)
+        public BaseDbContext(DbContextOptions options) : base(options)
         {
-            if (httpContextAccessor != null)
-            {
-                _httpContextAccessor = httpContextAccessor;
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,7 +35,6 @@ namespace Lintcoder.Base
                 .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified);
 
             var dateTime = DateTime.Now;
-            var user = _httpContextAccessor?.HttpContext?.User?.Identity?.Name ?? "";
             foreach (var entry in entries)
             {
                 switch (entry.State)

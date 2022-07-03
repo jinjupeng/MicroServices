@@ -17,6 +17,7 @@ namespace Lintcoder.Base.Entities
         /// 创建人
         /// </summary>
         [Required]
+        [MaxLength(64)]
         public string CreatedBy { get; set; }
 
         /// <summary>
@@ -27,16 +28,19 @@ namespace Lintcoder.Base.Entities
         /// <summary>
         /// 修改人
         /// </summary>
+        [MaxLength(64)]
         public string ModifiedBy { get; set; }
 
         /// <summary>
         /// 创建人名称
         /// </summary>
+        [MaxLength(16)]
         public string CreatedName { get; set; }
 
         /// <summary>
         /// 修改人
         /// </summary>
+        [MaxLength(16)]
         public string ModifiedName { get; set; }
     }
 

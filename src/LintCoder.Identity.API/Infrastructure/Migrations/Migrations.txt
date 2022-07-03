@@ -1,0 +1,2 @@
+﻿Add-Migration InitialCreate -Context IdentityDbContext -OutputDir Infrastructure/Migrations
+Add-Migration UpdateBaseEntity -Context IdentityDbContext -OutputDir Infrastructure/Migrations
