@@ -1,17 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Lintcoder.Base;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
-namespace Lintcoder.Base
+namespace LintCoder.Identity.Infrastructure.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
         /// <summary>
         /// EF上下文对象
         /// </summary>
-        private readonly DbContext _context;
+        private readonly IdentityDbContext _context;
 
-        public BaseRepository(DbContext context)
+        public BaseRepository(IdentityDbContext context)
         {
             this._context = context;
         }

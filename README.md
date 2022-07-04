@@ -2,6 +2,8 @@ https://github.com/CodeMazeBlog/cqrs-validation-mediatr-fluentvalidation
 
 https://github.com/dotnet-architecture/eShopOnContainers
 
+https://codewithmukesh.com/blog/cqrs-in-aspnet-core-3-1/
+
 
 [Command line]
 ```
