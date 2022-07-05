@@ -1,4 +1,4 @@
-﻿using LintCoder.Identity.API.Infrastructure.ActionResult;
+﻿using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Domain.Entities;
 using MediatR;
 using System.Runtime.Serialization;
@@ -15,7 +15,7 @@ namespace LintCoder.Identity.API.Application.Commands.User.CreateUser
     // https://docs.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/how-to-implement-a-lightweight-class-with-auto-implemented-properties
 
     [DataContract]
-    public class CreateUserCommand : IRequest<MsgModel<SysUser>>
+    public class CreateUserCommand : IRequest<MsgModel>
     {
         /// <summary>
         /// 用户名

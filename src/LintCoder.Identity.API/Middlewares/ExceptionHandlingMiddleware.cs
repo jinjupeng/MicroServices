@@ -1,5 +1,5 @@
-﻿using LintCoder.Identity.API.Exceptions;
-using LintCoder.Identity.API.Infrastructure.ActionResult;
+﻿using LintCoder.Identity.API.Application.Models.Response;
+using LintCoder.Identity.API.Exceptions;
 using LintCoder.Identity.Domain.Exceptions;
 using System.Text.Json;
 
@@ -41,7 +41,7 @@ namespace LintCoder.Identity.API.Middlewares
 
             httpContext.Response.StatusCode = statusCode;
 
-            await httpContext.Response.WriteAsync(JsonSerializer.Serialize(MsgModel<dynamic>.Fail(JsonSerializer.Serialize(response))));
+            await httpContext.Response.WriteAsync(JsonSerializer.Serialize(MsgModel.Fail(JsonSerializer.Serialize(response))));
         }
 
         private static int GetStatusCode(Exception exception) =>

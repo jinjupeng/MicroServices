@@ -1,11 +1,11 @@
 ﻿using Lintcoder.Base;
-using LintCoder.Identity.API.Infrastructure.ActionResult;
+using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Domain.Entities;
 using MediatR;
 
 namespace LintCoder.Identity.API.Application.Commands.User.CreateUser
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, MsgModel<SysUser>>
+    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, MsgModel>
     {
         private readonly IMediator _mediator;
         private readonly ILogger<CreateUserCommandHandler> _logger;
@@ -21,7 +21,7 @@ namespace LintCoder.Identity.API.Application.Commands.User.CreateUser
 
         }
 
-        public Task<MsgModel<SysUser>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public Task<MsgModel> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var sysUser = new SysUser
             {

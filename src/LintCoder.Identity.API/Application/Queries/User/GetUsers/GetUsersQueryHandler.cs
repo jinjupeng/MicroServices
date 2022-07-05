@@ -5,7 +5,7 @@ using MediatR;
 
 namespace LintCoder.Identity.API.Application.Queries.User.GetUsers
 {
-    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, List<SysUserResponse>>
+    public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, MsgModel>
     {
         private readonly IBaseRepository<SysUser> _baseRepository;
 
@@ -14,9 +14,9 @@ namespace LintCoder.Identity.API.Application.Queries.User.GetUsers
             _baseRepository = baseRepository;
         }
 
-        public Task<List<SysUserResponse>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
+        public Task<MsgModel> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(MsgModel.Success(request));
         }
     }
 }

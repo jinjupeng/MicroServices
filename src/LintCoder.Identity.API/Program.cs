@@ -16,10 +16,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDbContext<IdentityDbContext>(options =>
+builder.Services.AddDbContextPool<IdentityDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), optionsSqlServer => {
         optionsSqlServer.MigrationsAssembly(typeof(Program).GetTypeInfo().Assembly.GetName().Name);
-    }));
+    })); 
+builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 //builder.Services.AddMediatR(typeof(Program).Assembly);
