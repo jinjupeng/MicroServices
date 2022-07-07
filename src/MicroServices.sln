@@ -24,9 +24,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Identity.Infrastructure", "LintCoder.Identity.Infrastructure\LintCoder.Identity.Infrastructure.csproj", "{06376DAA-2B3A-4829-A433-859937A4C2E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Identity.Infrastructure", "LintCoder.Identity.Infrastructure\LintCoder.Identity.Infrastructure.csproj", "{06376DAA-2B3A-4829-A433-859937A4C2E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Identity.Domain", "LintCoder.Identity.Core\LintCoder.Identity.Domain.csproj", "{03BBDB6B-C6DD-4528-908B-A2607C2DBBE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Identity.Domain", "LintCoder.Identity.Core\LintCoder.Identity.Domain.csproj", "{03BBDB6B-C6DD-4528-908B-A2607C2DBBE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Shared.Authorization", "LintCoder.Shared.WebApi.Authorization\LintCoder.Shared.Authorization.csproj", "{7EE1031F-7711-4969-9309-C3A650293FB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Shared", "LintCoder.Shared\LintCoder.Shared.csproj", "{FC2AE691-D636-439E-80B3-D1DF10CCEE8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Shared.Authentication", "LintCoder.Shared.Authentication\LintCoder.Shared.Authentication.csproj", "{436C457D-67BA-481D-9B4A-862EE7C96B55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +60,18 @@ Global
 		{03BBDB6B-C6DD-4528-908B-A2607C2DBBE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03BBDB6B-C6DD-4528-908B-A2607C2DBBE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03BBDB6B-C6DD-4528-908B-A2607C2DBBE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EE1031F-7711-4969-9309-C3A650293FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EE1031F-7711-4969-9309-C3A650293FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EE1031F-7711-4969-9309-C3A650293FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EE1031F-7711-4969-9309-C3A650293FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC2AE691-D636-439E-80B3-D1DF10CCEE8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC2AE691-D636-439E-80B3-D1DF10CCEE8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC2AE691-D636-439E-80B3-D1DF10CCEE8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC2AE691-D636-439E-80B3-D1DF10CCEE8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{436C457D-67BA-481D-9B4A-862EE7C96B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{436C457D-67BA-481D-9B4A-862EE7C96B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{436C457D-67BA-481D-9B4A-862EE7C96B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{436C457D-67BA-481D-9B4A-862EE7C96B55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +83,9 @@ Global
 		{1C46AAD0-4A35-4EE4-846F-CFB8342F01D1} = {8713CC41-6B6B-497B-97AC-B84E0050080B}
 		{06376DAA-2B3A-4829-A433-859937A4C2E9} = {37F7BCD7-2E30-48B2-AD32-1BD7F31B969D}
 		{03BBDB6B-C6DD-4528-908B-A2607C2DBBE8} = {37F7BCD7-2E30-48B2-AD32-1BD7F31B969D}
+		{7EE1031F-7711-4969-9309-C3A650293FB6} = {8713CC41-6B6B-497B-97AC-B84E0050080B}
+		{FC2AE691-D636-439E-80B3-D1DF10CCEE8E} = {8713CC41-6B6B-497B-97AC-B84E0050080B}
+		{436C457D-67BA-481D-9B4A-862EE7C96B55} = {8713CC41-6B6B-497B-97AC-B84E0050080B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {301A9A64-9B60-49E8-9532-D2BBD210C4AD}

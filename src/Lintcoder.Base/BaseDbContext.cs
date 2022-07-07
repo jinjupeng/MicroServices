@@ -1,13 +1,16 @@
 ﻿using Lintcoder.Base.Entities;
-using Microsoft.AspNetCore.Http;
+using LintCoder.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace Lintcoder.Base
 {
     public class BaseDbContext : DbContext
     {
-        public BaseDbContext(DbContextOptions options) : base(options)
+        private readonly UserContext userContext;
+
+        public BaseDbContext(DbContextOptions options, UserContext userContext) : base(options)
         {
+            this.userContext = userContext;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,9 +43,13 @@ namespace Lintcoder.Base
                 switch (entry.State)
                 {
                     case EntityState.Modified:
+                        entry.Entity.ModifiedBy = Convert.ToString(userContext.Id);
+                        entry.Entity.ModifiedName = userContext.Name;
                         entry.Entity.ModifiedTime = dateTime;
                         break;
                     case EntityState.Added:
+                        entry.Entity.CreatedBy = Convert.ToString(userContext.Id);
+                        entry.Entity.CreatedName = userContext.Name;
                         entry.Entity.CreatedTime = dateTime;
                         break;
                 }

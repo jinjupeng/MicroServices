@@ -25,11 +25,12 @@
   <ItemGroup>
     <Folder Include="Application\Commands\User\UpdateUser\" />
     <Folder Include="Application\Validations\" />
-    <Folder Include="Infrastructure\Auth\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LintCoder.Identity.Infrastructure\LintCoder.Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\LintCoder.Shared.Authentication\LintCoder.Shared.Authentication.csproj" />
+    <ProjectReference Include="..\LintCoder.Shared.WebApi.Authorization\LintCoder.Shared.Authorization.csproj" />
   </ItemGroup>
 
 </Project>

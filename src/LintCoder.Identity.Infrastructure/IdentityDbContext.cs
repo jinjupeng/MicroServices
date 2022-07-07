@@ -1,6 +1,7 @@
 ﻿using Lintcoder.Base;
 using LintCoder.Identity.Domain.Entities;
 using LintCoder.Identity.Infrastructure.EntityConfigurations;
+using LintCoder.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ namespace LintCoder.Identity.Infrastructure
 {
     public class IdentityDbContext : BaseDbContext
     {
-        public IdentityDbContext(DbContextOptions options) : base(options)
+        public IdentityDbContext(DbContextOptions options, UserContext userContext) : base(options, userContext)
         {
         }
 

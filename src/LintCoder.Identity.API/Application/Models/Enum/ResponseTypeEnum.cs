@@ -3,6 +3,7 @@
     public enum ResponseTypeEnum
     {
         Success = 200,
-        Error = 500
+        Error = 500,
+        Unauthorized = 401,
     }
 }
