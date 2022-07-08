@@ -5,6 +5,8 @@ namespace Lintcoder.Base
 {
     public interface IBaseRepository<T> where T : class
     {
+        int SaveChanges();
+        Task<int> SaveChangesAsync();
         Task AddRangeAsync(IEnumerable<T> t);
         void DeleteRange(IEnumerable<T> t);
         void DeleteRange(Expression<Func<T, bool>> expression);

@@ -21,13 +21,8 @@ namespace LintCoder.Identity.API.Application.Commands.User.CreateUser
 
         }
 
-        public Task<MsgModel> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<MsgModel> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var sysUser = new SysUser
-            {
-                UserName = request.UserName,
-
-            };
             throw new NotImplementedException();
         }
     }

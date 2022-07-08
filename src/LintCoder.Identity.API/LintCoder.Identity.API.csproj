@@ -23,14 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\Commands\User\UpdateUser\" />
     <Folder Include="Application\Validations\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LintCoder.Identity.Infrastructure\LintCoder.Identity.Infrastructure.csproj" />
     <ProjectReference Include="..\LintCoder.Shared.Authentication\LintCoder.Shared.Authentication.csproj" />
-    <ProjectReference Include="..\LintCoder.Shared.WebApi.Authorization\LintCoder.Shared.Authorization.csproj" />
+    <ProjectReference Include="..\LintCoder.Shared.Authorization\LintCoder.Shared.Authorization.csproj" />
   </ItemGroup>
 
 </Project>

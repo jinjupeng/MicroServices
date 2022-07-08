@@ -17,6 +17,16 @@ namespace LintCoder.Identity.Infrastructure.Repositories
             this._context = context;
         }
 
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+
         public async Task AddRangeAsync(IEnumerable<T> t)
         {
             await _context.AddRangeAsync(t);

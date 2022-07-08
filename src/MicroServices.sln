@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Identity.Infrastr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Identity.Domain", "LintCoder.Identity.Core\LintCoder.Identity.Domain.csproj", "{03BBDB6B-C6DD-4528-908B-A2607C2DBBE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Shared.Authorization", "LintCoder.Shared.WebApi.Authorization\LintCoder.Shared.Authorization.csproj", "{7EE1031F-7711-4969-9309-C3A650293FB6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Shared.Authorization", "LintCoder.Shared.Authorization\LintCoder.Shared.Authorization.csproj", "{7EE1031F-7711-4969-9309-C3A650293FB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Shared", "LintCoder.Shared\LintCoder.Shared.csproj", "{FC2AE691-D636-439E-80B3-D1DF10CCEE8E}"
 EndProject

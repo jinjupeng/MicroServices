@@ -69,16 +69,19 @@ namespace LintCoder.Shared.Authentication
                         ValidIssuer = jwtOptions.Issuer,// Issuer，这两项和前面签发jwt的设置一致
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey))// 拿到SecurityKey
                     };
-                    options.Events.OnTokenValidated = (context) =>
+                    options.Events = new JwtBearerEvents
                     {
-                        var userContext = context.HttpContext.RequestServices.GetService<UserContext>();
-                        var claims = context.Principal.Claims;
-                        userContext.Id = long.Parse(claims.First(x => x.Type == JwtRegisteredClaimNames.NameId).Value);
-                        userContext.Account = claims.First(x => x.Type == JwtRegisteredClaimNames.UniqueName).Value;
-                        userContext.Name = claims.First(x => x.Type == JwtRegisteredClaimNames.Name).Value;
-                        userContext.RoleIds = claims.First(x => x.Type == "roleids").Value;
-                        userContext.RemoteIpAddress = context.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
-                        return Task.CompletedTask;
+                        OnTokenValidated = (context) =>
+                        {
+                            var userContext = context.HttpContext.RequestServices.GetService<UserContext>();
+                            var claims = context.Principal.Claims;
+                            userContext.Id = long.Parse(claims.First(x => x.Type == JwtRegisteredClaimNames.NameId).Value);
+                            userContext.Account = claims.First(x => x.Type == JwtRegisteredClaimNames.UniqueName).Value;
+                            userContext.Name = claims.First(x => x.Type == JwtRegisteredClaimNames.Name).Value;
+                            userContext.RoleIds = claims.First(x => x.Type == "roleids").Value;
+                            userContext.RemoteIpAddress = context.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+                            return Task.CompletedTask;
+                        }
                     };
                 });
 

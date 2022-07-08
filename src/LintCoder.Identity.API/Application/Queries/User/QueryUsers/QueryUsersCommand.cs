@@ -4,7 +4,7 @@ using MediatR;
 
 namespace LintCoder.Identity.API.Application.Queries.User.GetUsers
 {
-    public class GetUsersQuery : QueryModel, IRequest<MsgModel> 
+    public class QueryUsersCommand : QueryModel, IRequest<MsgModel> 
     {
         public string Phone { get; set; }
 
