@@ -2,6 +2,8 @@
 using LintCoder.Identity.API.Application.Commands.User.DeleteUser;
 using LintCoder.Identity.API.Application.Commands.User.UpdateUser;
 using LintCoder.Identity.API.Application.Queries.User.GetUsers;
+using LintCoder.Identity.API.Application.Queries.User.QueryCurrentUser;
+using LintCoder.Identity.API.Application.Queries.User.QueryPasswordIsDefault;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -65,6 +67,28 @@ namespace LintCoder.Identity.API.Controllers
         public async Task<IActionResult> DeleteAsync([FromRoute] long id)
         {
             var result = await _sender.Send(new DeleteUserCommand { Id = id });
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 获取登录用户个人信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("current")]
+        public async Task<IActionResult> GetCurrentUserInfoAsync()
+        {
+            var result = await _sender.Send(new QueryCurrentUserCommand());
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 判断当前用户密码是否是初始密码
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("pwd/IsDefault")]
+        public async Task<IActionResult> PasswordIsDefaultAsync()
+        {
+            var result = await _sender.Send(new QueryPasswordIsDefaultCommand());
             return Ok(result);
         }
     }

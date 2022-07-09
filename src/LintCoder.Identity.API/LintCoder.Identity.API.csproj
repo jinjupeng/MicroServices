@@ -26,8 +26,10 @@
 
   <ItemGroup>
     <Folder Include="Application\Commands\Api\" />
+    <Folder Include="Application\Commands\Menu\CreateMenu\" />
+    <Folder Include="Application\Commands\Menu\UpdateMenu\" />
+    <Folder Include="Application\Commands\Menu\DeleteMenu\" />
     <Folder Include="Application\Commands\Role\" />
-    <Folder Include="Application\Commands\Menu\" />
     <Folder Include="Application\Queries\Dept\QueryDept\" />
     <Folder Include="Application\Queries\Dept\QueryDeptTree\" />
     <Folder Include="Application\Validations\" />

@@ -3,13 +3,19 @@ using LintCoder.Identity.Domain.Entities;
 
 namespace LintCoder.Identity.API.Application.Models.TreeNode
 {
-    public class SysMenuNode : SysMenu, IDataTree<SysMenuNode, long>
+    public class SysMenuNode : IDataTree<SysMenuNode, long>
     {
         public List<SysMenuNode> Children { get; set; }
 
-        public string path { get => Url; }
+        public long Id { get; set; }
 
-        public string name { get => MenuName; }
+        public long MenuPid { get; set; }
+
+        public string Path { get; set; }
+
+        public string Name { get; set; }
+
+        public string Icon { get; set; }
 
         public long GetId()
         {

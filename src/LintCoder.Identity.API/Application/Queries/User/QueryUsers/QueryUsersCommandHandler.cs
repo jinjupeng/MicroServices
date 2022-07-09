@@ -5,11 +5,11 @@ using MediatR;
 
 namespace LintCoder.Identity.API.Application.Queries.User.GetUsers
 {
-    public class QueryUsersHandler : IRequestHandler<QueryUsersCommand, MsgModel>
+    public class QueryUsersCommandHandler : IRequestHandler<QueryUsersCommand, MsgModel>
     {
         private readonly IBaseRepository<SysUser> _baseRepository;
 
-        public QueryUsersHandler(IBaseRepository<SysUser> baseRepository)
+        public QueryUsersCommandHandler(IBaseRepository<SysUser> baseRepository)
         {
             _baseRepository = baseRepository;
         }
