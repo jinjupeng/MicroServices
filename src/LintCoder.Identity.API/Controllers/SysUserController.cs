@@ -1,4 +1,5 @@
-﻿using LintCoder.Identity.API.Application.Commands.User.CreateUser;
+﻿using LintCoder.Identity.API.Application.Commands.User.ChangePassword;
+using LintCoder.Identity.API.Application.Commands.User.CreateUser;
 using LintCoder.Identity.API.Application.Commands.User.DeleteUser;
 using LintCoder.Identity.API.Application.Commands.User.UpdateUser;
 using LintCoder.Identity.API.Application.Queries.User.GetUsers;
@@ -48,11 +49,10 @@ namespace LintCoder.Identity.API.Controllers
         /// <summary>
         /// 修改用户
         /// </summary>
-        /// <param name="id">id</param>
         /// <param name="updateUserCommand">用户信息</param>
         /// <returns></returns>
-        [HttpPut("{id}/Update")]
-        public async Task<IActionResult> UpdateAsync([FromRoute] long id, [FromBody] UpdateUserCommand updateUserCommand)
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateAsync([FromBody] UpdateUserCommand updateUserCommand)
         {
             var result = await _sender.Send(updateUserCommand);
             return Ok(result);
@@ -89,6 +89,17 @@ namespace LintCoder.Identity.API.Controllers
         public async Task<IActionResult> PasswordIsDefaultAsync()
         {
             var result = await _sender.Send(new QueryPasswordIsDefaultCommand());
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        /// <returns></returns>
+        [HttpPut("pwd/change")]
+        public async Task<IActionResult> PasswordChangeAsync([FromBody] ChangePasswordCommand request)
+        {
+            var result = await _sender.Send(request);
             return Ok(result);
         }
     }
