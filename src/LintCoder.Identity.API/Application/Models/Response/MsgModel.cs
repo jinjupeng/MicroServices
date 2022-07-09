@@ -4,6 +4,7 @@ namespace LintCoder.Identity.API.Application.Models.Response
 {
     public class MsgModel
     {
+        public bool IsOk { get => Code == (int)ResponseTypeEnum.Success; }
         public int Code { get; set; } 
         public string Message { get; set; }
 

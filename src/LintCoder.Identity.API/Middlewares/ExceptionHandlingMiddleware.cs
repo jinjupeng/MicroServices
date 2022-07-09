@@ -1,6 +1,8 @@
-﻿using LintCoder.Identity.API.Application.Models.Response;
+﻿using LintCoder.Identity.API.Application.Models.Enum;
+using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.API.Exceptions;
 using LintCoder.Identity.Domain.Exceptions;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 
 namespace LintCoder.Identity.API.Middlewares
@@ -27,8 +29,8 @@ namespace LintCoder.Identity.API.Middlewares
 
         private static async Task HandleExceptionAsync(HttpContext httpContext, Exception exception)
         {
-            var statusCode = GetStatusCode(exception);
-
+            // var statusCode = GetStatusCode(exception);
+            var statusCode = StatusCodes.Status200OK;
             var response = new
             {
                 title = GetTitle(exception),
@@ -37,11 +39,16 @@ namespace LintCoder.Identity.API.Middlewares
                 errors = GetErrors(exception)
             };
 
-            httpContext.Response.ContentType = "application/json";
+            httpContext.Response.ContentType = "application/json;charset=utf-8;";
 
             httpContext.Response.StatusCode = statusCode;
 
-            await httpContext.Response.WriteAsync(JsonSerializer.Serialize(MsgModel.Fail(JsonSerializer.Serialize(response))));
+            var jsonSerializerOptions = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                WriteIndented = true
+            };
+            await httpContext.Response.WriteAsync(JsonSerializer.Serialize(MsgModel.Fail(JsonSerializer.Serialize(response, jsonSerializerOptions))));
         }
 
         private static int GetStatusCode(Exception exception) =>

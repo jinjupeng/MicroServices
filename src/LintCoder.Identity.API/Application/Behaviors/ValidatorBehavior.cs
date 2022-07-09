@@ -26,14 +26,23 @@ namespace LintCoder.Identity.API.Application.Behaviors
                 .Select(v => v.Validate(request))
                 .SelectMany(result => result.Errors)
                 .Where(error => error != null)
-                .ToList();
+                .GroupBy(
+                    x => x.PropertyName,
+                    x => x.ErrorMessage,
+                    (propertyName, errorMessages) => new
+                    {
+                        Key = propertyName,
+                        Values = errorMessages.Distinct().ToArray()
+                    })
+                .ToDictionary(x => x.Key, x => x.Values);
 
             if (failures.Any())
             {
                 _logger.LogWarning("Validation errors - {CommandType} - Command: {@Command} - Errors: {@ValidationErrors}", typeName, request, failures);
 
-                throw new ValidationException(
-                    $"Command Validation Errors for type {typeof(TRequest).Name}", failures);
+                //throw new ValidationException(
+                //    $"Command Validation Errors for type {typeof(TRequest).Name}", failures);
+                throw new LintCoder.Identity.API.Exceptions.ValidationException(failures);
             }
 
             return await next();

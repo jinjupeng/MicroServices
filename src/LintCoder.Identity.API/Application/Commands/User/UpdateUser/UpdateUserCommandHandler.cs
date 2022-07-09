@@ -1,6 +1,7 @@
-﻿using Common.Utility.Models;
-using Lintcoder.Base;
+﻿using Lintcoder.Base;
+using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Domain.Entities;
+using Mapster;
 using MediatR;
 
 namespace LintCoder.Identity.API.Application.Commands.User.UpdateUser
@@ -21,9 +22,18 @@ namespace LintCoder.Identity.API.Application.Commands.User.UpdateUser
 
         }
 
-        public Task<MsgModel> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        public async Task<MsgModel> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var sysUser = request.Adapt<SysUser>();
+            await _baseRepository.AddAsync(sysUser, cancellationToken);
+            if(await _baseRepository.SaveChangesAsync() > 0)
+            {
+                return MsgModel.Success("更新成功");
+            }
+            else
+            {
+                return MsgModel.Fail("更新失败");
+            }
         }
     }
 }

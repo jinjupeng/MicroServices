@@ -1,12 +1,9 @@
 ﻿using LintCoder.Shared.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
 namespace LintCoder.Shared.Authentication
 {
@@ -47,6 +44,7 @@ namespace LintCoder.Shared.Authentication
         public static IServiceCollection AddBasicAuthentication(this IServiceCollection services)
         {
             var jwtOptions = services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>().Value;
+            var jwtHelper = services.BuildServiceProvider().GetService<JwtHelper>();
 
             services.AddAuthentication(s =>
             {
@@ -58,27 +56,26 @@ namespace LintCoder.Shared.Authentication
                 // 添加JwtBearer验证服务：
                 .AddJwtBearer(options =>
                 {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,// 是否验证Issuer
-                        ValidateAudience = true,// 是否验证Audience
-                        ValidateLifetime = true,// 是否验证失效时间
-                        ClockSkew = TimeSpan.FromSeconds(30),
-                        ValidateIssuerSigningKey = true,// 是否验证SecurityKey
-                        ValidAudience = jwtOptions.Audience,// Audience
-                        ValidIssuer = jwtOptions.Issuer,// Issuer，这两项和前面签发jwt的设置一致
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.SecretKey))// 拿到SecurityKey
-                    };
+                    options.TokenValidationParameters = jwtHelper.GenarateTokenValidationParameters();
                     options.Events = new JwtBearerEvents
                     {
+                        OnAuthenticationFailed = context =>
+                        {
+                            // 如果token过期，则把<是否过期>添加到返回头信息中
+                            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                            {
+                                context.Response.Headers.Add("Token-Expired", "true");
+                            }
+                            return Task.CompletedTask;
+                        },
                         OnTokenValidated = (context) =>
                         {
                             var userContext = context.HttpContext.RequestServices.GetService<UserContext>();
                             var claims = context.Principal.Claims;
-                            userContext.Id = long.Parse(claims.First(x => x.Type == JwtRegisteredClaimNames.NameId).Value);
-                            userContext.Account = claims.First(x => x.Type == JwtRegisteredClaimNames.UniqueName).Value;
-                            userContext.Name = claims.First(x => x.Type == JwtRegisteredClaimNames.Name).Value;
-                            userContext.RoleIds = claims.First(x => x.Type == "roleids").Value;
+                            userContext.Id = long.Parse(claims.First(x => x.Type == JwtClaimNames.UserId).Value);
+                            userContext.Account = claims.First(x => x.Type == JwtClaimNames.UserName).Value;
+                            userContext.Name = claims.First(x => x.Type == JwtClaimNames.NickName).Value;
+                            userContext.RoleIds = claims.First(x => x.Type == JwtClaimNames.RoleIds).Value;
                             userContext.RemoteIpAddress = context.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
                             return Task.CompletedTask;
                         }

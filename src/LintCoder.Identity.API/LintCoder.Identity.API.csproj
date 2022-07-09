@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.1.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.6" />
@@ -23,6 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Application\Commands\Api\" />
+    <Folder Include="Application\Commands\Role\" />
+    <Folder Include="Application\Commands\Menu\" />
+    <Folder Include="Application\Queries\Dept\QueryDept\" />
+    <Folder Include="Application\Queries\Dept\QueryDeptTree\" />
     <Folder Include="Application\Validations\" />
   </ItemGroup>
 

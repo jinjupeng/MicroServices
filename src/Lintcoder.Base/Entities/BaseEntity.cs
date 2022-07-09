@@ -29,7 +29,7 @@ namespace Lintcoder.Base.Entities
         /// 修改人
         /// </summary>
         [MaxLength(64)]
-        public string ModifiedBy { get; set; }
+        public string? ModifiedBy { get; set; }
 
         /// <summary>
         /// 创建人名称
@@ -41,7 +41,7 @@ namespace Lintcoder.Base.Entities
         /// 修改人
         /// </summary>
         [MaxLength(16)]
-        public string ModifiedName { get; set; }
+        public string? ModifiedName { get; set; }
     }
 
     public class BaseEntity : BaseEntity<Guid>

@@ -1,3 +1,4 @@
+using FluentValidation;
 using Lintcoder.Base;
 using LintCoder.Identity.API.Application.Behaviors;
 using LintCoder.Identity.API.Application.Models.Enum;
@@ -19,7 +20,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options => {
+    // 以驼峰命名方式序列化字段
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -42,6 +46,23 @@ builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavi
 
 builder.Services.AddTransient<ISysApiService, SysApiService>();
 
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy
+                          .SetIsOriginAllowed(origin => true)
+                          .SetPreflightMaxAge(new TimeSpan(0, 10, 0))
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials(); //指定处理cookie
+                      });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -54,11 +75,17 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
+app.UseCors(MyAllowSpecificOrigins);
+
 app.UseStatusCodePages(context => {
     var response = context.HttpContext.Response;
     if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
     {
-        var payload = JsonSerializer.Serialize(MsgModel.Fail(ResponseTypeEnum.Unauthorized, "很抱歉，您无权访问该接口!"));
+        var jsonSeralizeOptions = new JsonSerializerOptions
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        var payload = JsonSerializer.Serialize(MsgModel.Fail(ResponseTypeEnum.Unauthorized, "很抱歉，您无权访问该接口!"), jsonSeralizeOptions);
         response.ContentType = "application/json";
         response.StatusCode = StatusCodes.Status200OK;
         response.WriteAsync(payload);

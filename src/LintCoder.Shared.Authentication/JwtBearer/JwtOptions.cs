@@ -24,7 +24,7 @@ namespace LintCoder.Shared.Authentication.JwtBearer
         /// <summary>
         /// 过期时间（单位分钟）：默认十分钟
         /// </summary>
-        public string ExpireMinutes { get; set; } = "10";
+        public int ExpireMinutes { get; set; } = 10;
 
         /// <summary>
         /// 过期时间（单位分钟）：默认十分钟，必须要大于签发时间

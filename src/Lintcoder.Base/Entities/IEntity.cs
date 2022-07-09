@@ -28,7 +28,7 @@ namespace Lintcoder.Base.Entities
         /// <summary>
         /// 修改人
         /// </summary>
-        public string ModifiedBy { get; set; }
+        public string? ModifiedBy { get; set; }
 
         /// <summary>
         /// 创建人名称
@@ -38,7 +38,7 @@ namespace Lintcoder.Base.Entities
         /// <summary>
         /// 修改人
         /// </summary>
-        public string ModifiedName { get; set; }
+        public string? ModifiedName { get; set; }
 
     }
 }

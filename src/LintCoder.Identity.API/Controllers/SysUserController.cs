@@ -24,7 +24,7 @@ namespace LintCoder.Identity.API.Controllers
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("GetPaged")]
         public async Task<IActionResult> GetPagedAsync([FromQuery] QueryUsersCommand query)
         {
             var result = await _sender.Send(query);
@@ -36,7 +36,7 @@ namespace LintCoder.Identity.API.Controllers
         /// </summary>
         /// <param name="createUserCommand"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost("Create")]
         public async Task<IActionResult> CreateAsync([FromBody] CreateUserCommand createUserCommand)
         {
             var result = await _sender.Send(createUserCommand);
@@ -49,7 +49,7 @@ namespace LintCoder.Identity.API.Controllers
         /// <param name="id">id</param>
         /// <param name="updateUserCommand">用户信息</param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id}/Update")]
         public async Task<IActionResult> UpdateAsync([FromRoute] long id, [FromBody] UpdateUserCommand updateUserCommand)
         {
             var result = await _sender.Send(updateUserCommand);
@@ -61,7 +61,7 @@ namespace LintCoder.Identity.API.Controllers
         /// </summary>
         /// <param name="id">用户id</param>
         /// <returns></returns>
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/Delete")]
         public async Task<IActionResult> DeleteAsync([FromRoute] long id)
         {
             var result = await _sender.Send(new DeleteUserCommand { Id = id });
