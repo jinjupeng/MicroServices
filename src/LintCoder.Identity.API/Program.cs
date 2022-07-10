@@ -1,8 +1,10 @@
 using FluentValidation;
 using Lintcoder.Base;
+using LintCoder.Consul;
 using LintCoder.Identity.API.Application.Behaviors;
 using LintCoder.Identity.API.Application.Models.Enum;
 using LintCoder.Identity.API.Application.Models.Response;
+using LintCoder.Identity.API.HealthChecks;
 using LintCoder.Identity.API.Infrastructure.Authorization;
 using LintCoder.Identity.API.Infrastructure.Services;
 using LintCoder.Identity.API.Middlewares;
@@ -63,6 +65,9 @@ builder.Services.AddCors(options =>
                       });
 });
 
+builder.Services.AddHealthChecks(builder.Configuration);
+builder.Services.AddConsul(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -71,10 +76,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseConsul(app.Lifetime);
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
-
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseStatusCodePages(context => {
@@ -97,6 +102,8 @@ app.UseStatusCodePages(context => {
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseHealthChecks();
 
 app.MapControllers();
 

@@ -2,6 +2,7 @@
 using LintCoder.Identity.API.Application.Commands.User.CreateUser;
 using LintCoder.Identity.API.Application.Commands.User.DeleteUser;
 using LintCoder.Identity.API.Application.Commands.User.UpdateUser;
+using LintCoder.Identity.API.Application.Models.Request;
 using LintCoder.Identity.API.Application.Queries.User.GetUsers;
 using LintCoder.Identity.API.Application.Queries.User.QueryCurrentUser;
 using LintCoder.Identity.API.Application.Queries.User.QueryPasswordIsDefault;
@@ -49,12 +50,13 @@ namespace LintCoder.Identity.API.Controllers
         /// <summary>
         /// 修改用户
         /// </summary>
-        /// <param name="updateUserCommand">用户信息</param>
+        /// <param name="id"></param>
+        /// <param name="updateUserRequest">用户信息</param>
         /// <returns></returns>
-        [HttpPut("Update")]
-        public async Task<IActionResult> UpdateAsync([FromBody] UpdateUserCommand updateUserCommand)
+        [HttpPut("{id}/Update")]
+        public async Task<IActionResult> UpdateAsync([FromRoute] long id, [FromBody] UpdateUserRequest updateUserRequest)
         {
-            var result = await _sender.Send(updateUserCommand);
+            var result = await _sender.Send(new UpdateUserCommand { Id = id, UpdateUserRequest = updateUserRequest});
             return Ok(result);
         }
 
