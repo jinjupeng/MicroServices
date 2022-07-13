@@ -1,5 +1,4 @@
-﻿using LintCoder.Identity.API.Application.Models.Enum;
-using LintCoder.Identity.API.Application.Models.Response;
+﻿using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.API.Exceptions;
 using LintCoder.Identity.Domain.Exceptions;
 using System.Text.Encodings.Web;

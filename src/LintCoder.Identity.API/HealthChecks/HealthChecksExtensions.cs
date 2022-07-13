@@ -1,10 +1,10 @@
 ﻿using HealthChecks.UI.Client;
 using LintCoder.Identity.Infrastructure;
+using LintCoder.Shared.MongoDB;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Net.Mime;
+using System.Text;
+using System.Text.Json;
 
 namespace LintCoder.Identity.API.HealthChecks
 {
@@ -21,8 +21,10 @@ namespace LintCoder.Identity.API.HealthChecks
             IHealthChecksBuilder healthChecks = services.AddHealthChecks();
 
             healthChecks.AddDbContextCheck<IdentityDbContext>("IdentityDbContext");
-
+            healthChecks.AddCheck<RedisHealthCheck>("RedisHealthCheck");
             healthChecks.AddCheck("self", () => HealthCheckResult.Healthy());
+
+            services.AddMongoHealthCheck();
 
             return services;
         }
@@ -51,23 +53,48 @@ namespace LintCoder.Identity.API.HealthChecks
         /// 自定义响应
         /// </summary>
         /// <param name="context"></param>
-        /// <param name="result"></param>
+        /// <param name="healthReport"></param>
         /// <returns></returns>
-        private static Task WriteResponse(HttpContext context, HealthReport result)
+        private static Task WriteResponse(HttpContext context, HealthReport healthReport)
         {
-            context.Response.ContentType = MediaTypeNames.Application.Json;
+            context.Response.ContentType = "application/json; charset=utf-8";
 
-            var json = new JObject(
-                new JProperty("status", result.Status.ToString()),
-                new JProperty("results", new JObject(result.Entries.Select(pair =>
-                    new JProperty(pair.Key, new JObject(
-                        new JProperty("status", pair.Value.Status.ToString()),
-                        new JProperty("description", pair.Value.Description),
-                        new JProperty("data", new JObject(pair.Value.Data.Select(
-                            p => new JProperty(p.Key, p.Value))))))))));
+            var options = new JsonWriterOptions { Indented = true };
+
+            using var memoryStream = new MemoryStream();
+            using (var jsonWriter = new Utf8JsonWriter(memoryStream, options))
+            {
+                jsonWriter.WriteStartObject();
+                jsonWriter.WriteString("status", healthReport.Status.ToString());
+                jsonWriter.WriteStartObject("results");
+
+                foreach (var healthReportEntry in healthReport.Entries)
+                {
+                    jsonWriter.WriteStartObject(healthReportEntry.Key);
+                    jsonWriter.WriteString("status",
+                        healthReportEntry.Value.Status.ToString());
+                    jsonWriter.WriteString("description",
+                        healthReportEntry.Value.Description);
+                    jsonWriter.WriteStartObject("data");
+
+                    foreach (var item in healthReportEntry.Value.Data)
+                    {
+                        jsonWriter.WritePropertyName(item.Key);
+
+                        System.Text.Json.JsonSerializer.Serialize(jsonWriter, item.Value,
+                            item.Value?.GetType() ?? typeof(object));
+                    }
+
+                    jsonWriter.WriteEndObject();
+                    jsonWriter.WriteEndObject();
+                }
+
+                jsonWriter.WriteEndObject();
+                jsonWriter.WriteEndObject();
+            }
 
             return context.Response.WriteAsync(
-                json.ToString(Formatting.Indented));
+                Encoding.UTF8.GetString(memoryStream.ToArray()));
         }
     }
 }

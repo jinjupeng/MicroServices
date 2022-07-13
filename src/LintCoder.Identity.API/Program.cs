@@ -1,3 +1,4 @@
+using CSRedis;
 using FluentValidation;
 using Lintcoder.Base;
 using LintCoder.Consul;
@@ -12,11 +13,23 @@ using LintCoder.Identity.Infrastructure;
 using LintCoder.Identity.Infrastructure.Repositories;
 using LintCoder.Shared.Authentication;
 using LintCoder.Shared.Authorization;
+using LintCoder.Shared.MongoDB;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using NLog;
+using NLog.Extensions.Logging;
+using NLog.Web;
 using System.Net;
 using System.Reflection;
 using System.Text.Json;
+
+// Loads appsetting.json and enables ${configsetting}
+var logger = LogManager.Setup()
+                       .LoadConfigurationFromAppSettings()
+                       .GetCurrentClassLogger();
+IConfigurationRoot config = new ConfigurationBuilder()
+    .AddJsonFile(path: "appsettings.json").Build();
+ConfigSettingLayoutRenderer.DefaultConfiguration = config;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,6 +80,11 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddHealthChecks(builder.Configuration);
 builder.Services.AddConsul(builder.Configuration);
+
+RedisHelper.Initialization(new CSRedisClient(builder.Configuration.GetConnectionString("CSRedisConnection")));
+
+builder.Services.AddMongoOptions(builder.Configuration);
+builder.Host.UseNLog();
 
 var app = builder.Build();
 
