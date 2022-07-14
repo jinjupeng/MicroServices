@@ -84,6 +84,7 @@ builder.Services.AddConsul(builder.Configuration);
 RedisHelper.Initialization(new CSRedisClient(builder.Configuration.GetConnectionString("CSRedisConnection")));
 
 builder.Services.AddMongoOptions(builder.Configuration);
+builder.Logging.ClearProviders();
 builder.Host.UseNLog();
 
 var app = builder.Build();
