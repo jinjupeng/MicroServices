@@ -22,3 +22,5 @@ dotnet ef database update
 ```
 Update-Database
 ```
+
+[EasyNetQ](https://www.cnblogs.com/shanfeng1000/p/13035758.html)
