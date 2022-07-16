@@ -5,8 +5,8 @@ namespace LintCoder.Shared.EasyNetQ.Producers
 {
     public class BusClient : IBusClient
     {
-        ProducerOptions easyNetQProducerOptions;
-        IBus bus;
+        readonly ProducerOptions easyNetQProducerOptions;
+        readonly IBus bus;
         bool disposed = false;
 
         public BusClient(ProducerOptions easyNetQProducerOptions)

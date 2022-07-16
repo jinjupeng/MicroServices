@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 
 namespace LintCoder.Shared.EasyNetQ.Extensions
 {
-    public static class EasyNetQExtensions
+    public static class ServicesCollectionExtensions
     {
         /// <summary>
         /// 注册EasyNetBus总线
@@ -330,9 +330,9 @@ namespace LintCoder.Shared.EasyNetQ.Extensions
             }
 
             var messageType = @interface.GetGenericArguments().First();
-            var addSubscriber = typeof(EasyNetQExtensions)
+            var addSubscriber = typeof(ServicesCollectionExtensions)
                 .GetMethods()
-                .Where(f => string.Equals(f.Name, nameof(EasyNetQExtensions.AddSubscriber)) &&
+                .Where(f => string.Equals(f.Name, nameof(ServicesCollectionExtensions.AddSubscriber)) &&
                     f.IsGenericMethod &&
                     f.GetGenericArguments().Length == 2 &&
                     f.GetParameters().LastOrDefault()?.ParameterType == typeof(string))
@@ -396,9 +396,9 @@ namespace LintCoder.Shared.EasyNetQ.Extensions
             var types = @interface.GetGenericArguments();
             var requestType = types.First();
             var response = types.Last();
-            var addResponder = typeof(EasyNetQExtensions)
+            var addResponder = typeof(ServicesCollectionExtensions)
                 .GetMethods()
-                .Where(f => string.Equals(f.Name, nameof(EasyNetQExtensions.AddResponder)) && f.IsGenericMethod && f.GetGenericArguments().Length == 3)
+                .Where(f => string.Equals(f.Name, nameof(ServicesCollectionExtensions.AddResponder)) && f.IsGenericMethod && f.GetGenericArguments().Length == 3)
                 .FirstOrDefault();
 
             addResponder.MakeGenericMethod(requestType, response, responderType).Invoke(null, new object[] { builder });
@@ -552,9 +552,9 @@ namespace LintCoder.Shared.EasyNetQ.Extensions
                 throw new ArgumentException($"the receiver type must be implement IEasyNetQReceiver<> and none abstract class", "receiverType");
             }
             var messageType = @interface.GetGenericArguments().First();
-            var addReceiver = typeof(EasyNetQExtensions)
+            var addReceiver = typeof(ServicesCollectionExtensions)
                 .GetMethods()
-                .Where(f => string.Equals(f.Name, nameof(EasyNetQExtensions.AddReceiver)))
+                .Where(f => string.Equals(f.Name, nameof(ServicesCollectionExtensions.AddReceiver)))
                 .Where(f => f.IsGenericMethod && f.GetGenericArguments().Length == 2 && f.GetParameters().LastOrDefault()?.ParameterType == typeof(string))
                 .FirstOrDefault();
 
