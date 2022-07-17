@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lintcoder.Base\Lintcoder.Base.csproj" />
+    <ProjectReference Include="..\Lintcoder.Base\LintCoder.Base.csproj" />
     <ProjectReference Include="..\LintCoder.Identity.Core\LintCoder.Identity.Domain.csproj" />
   </ItemGroup>
 

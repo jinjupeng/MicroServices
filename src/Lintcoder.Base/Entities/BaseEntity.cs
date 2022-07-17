@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Lintcoder.Base.Entities
+namespace LintCoder.Base.Entities
 {
     public class BaseEntity<TKey> : IEntity
     {

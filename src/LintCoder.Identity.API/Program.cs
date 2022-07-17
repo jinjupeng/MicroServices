@@ -1,6 +1,6 @@
 using CSRedis;
 using FluentValidation;
-using Lintcoder.Base;
+using LintCoder.Base;
 using LintCoder.Consul;
 using LintCoder.Identity.API.Application.Behaviors;
 using LintCoder.Identity.API.Application.Models.Enum;

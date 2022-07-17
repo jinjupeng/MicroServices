@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Identity.API", "L
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9ECC9F96-6825-40B6-A2A0-7AC4935EE289}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lintcoder.Base", "Lintcoder.Base\Lintcoder.Base.csproj", "{1C46AAD0-4A35-4EE4-846F-CFB8342F01D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Base", "LintCoder.Base\LintCoder.Base.csproj", "{1C46AAD0-4A35-4EE4-846F-CFB8342F01D1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D93A597-3B8A-4B1F-A18C-14247724D8E5}"
 	ProjectSection(SolutionItems) = preProject
@@ -42,9 +42,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.EventBus", "LintC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Shared.MongoDB", "LintCoder.Shared.MongoDB\LintCoder.Shared.MongoDB.csproj", "{02200122-A42D-48AC-85AE-C1D891448C76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Shared.EasyNetQ", "LintCoder.Shared.EasyNetQ\LintCoder.Shared.EasyNetQ.csproj", "{1EFB390A-3D87-46C5-BDA3-E58FA63B99E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Shared.EasyNetQ", "LintCoder.Shared.EasyNetQ\LintCoder.Shared.EasyNetQ.csproj", "{1EFB390A-3D87-46C5-BDA3-E58FA63B99E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Shared.EasyNetQ.Test", "LintCoder.Shared.EasyNetQ.Test\LintCoder.Shared.EasyNetQ.Test.csproj", "{87874174-7045-4DF0-A6BF-81083691E035}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Shared.EasyNetQ.Test", "LintCoder.Shared.EasyNetQ.Test\LintCoder.Shared.EasyNetQ.Test.csproj", "{87874174-7045-4DF0-A6BF-81083691E035}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

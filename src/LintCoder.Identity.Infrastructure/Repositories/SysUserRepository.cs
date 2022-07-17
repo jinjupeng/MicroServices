@@ -1,4 +1,4 @@
-﻿using Lintcoder.Base;
+﻿using LintCoder.Base;
 using LintCoder.Identity.Domain.Entities;
 using System;
 using System.Collections.Generic;

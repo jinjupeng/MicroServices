@@ -1,8 +1,8 @@
-﻿using Lintcoder.Base.Entities;
+﻿using LintCoder.Base.Entities;
 using LintCoder.Shared;
 using Microsoft.EntityFrameworkCore;
 
-namespace Lintcoder.Base
+namespace LintCoder.Base
 {
     public class BaseDbContext : DbContext
     {

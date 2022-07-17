@@ -1,4 +1,4 @@
-﻿using Lintcoder.Base;
+﻿using LintCoder.Base;
 using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Domain.Entities;
 using MediatR;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
-namespace Lintcoder.Base
+namespace LintCoder.Base
 {
     public interface IBaseRepository<T> where T : class
     {

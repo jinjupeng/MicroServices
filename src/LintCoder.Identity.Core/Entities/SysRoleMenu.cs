@@ -1,4 +1,4 @@
-﻿using Lintcoder.Base.Entities;
+﻿using LintCoder.Base.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
