@@ -46,6 +46,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Shared.EasyNetQ",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LintCoder.Shared.EasyNetQ.Test", "LintCoder.Shared.EasyNetQ.Test\LintCoder.Shared.EasyNetQ.Test.csproj", "{87874174-7045-4DF0-A6BF-81083691E035}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LintCoder.Shared.MongoDB.Test", "LintCoder.Shared.MongoDB.Test\LintCoder.Shared.MongoDB.Test.csproj", "{7C3601FA-A409-465E-9148-4F5335E86A43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{87874174-7045-4DF0-A6BF-81083691E035}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87874174-7045-4DF0-A6BF-81083691E035}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87874174-7045-4DF0-A6BF-81083691E035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C3601FA-A409-465E-9148-4F5335E86A43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C3601FA-A409-465E-9148-4F5335E86A43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C3601FA-A409-465E-9148-4F5335E86A43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C3601FA-A409-465E-9148-4F5335E86A43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +129,7 @@ Global
 		{02200122-A42D-48AC-85AE-C1D891448C76} = {8713CC41-6B6B-497B-97AC-B84E0050080B}
 		{1EFB390A-3D87-46C5-BDA3-E58FA63B99E7} = {8713CC41-6B6B-497B-97AC-B84E0050080B}
 		{87874174-7045-4DF0-A6BF-81083691E035} = {9ECC9F96-6825-40B6-A2A0-7AC4935EE289}
+		{7C3601FA-A409-465E-9148-4F5335E86A43} = {9ECC9F96-6825-40B6-A2A0-7AC4935EE289}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {301A9A64-9B60-49E8-9532-D2BBD210C4AD}

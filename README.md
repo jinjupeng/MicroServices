@@ -1,8 +1,4 @@
-https://github.com/CodeMazeBlog/cqrs-validation-mediatr-fluentvalidation
 
-https://github.com/dotnet-architecture/eShopOnContainers
-
-https://codewithmukesh.com/blog/cqrs-in-aspnet-core-3-1/
 
 
 [Command line]
@@ -24,3 +20,7 @@ Update-Database
 ```
 
 [EasyNetQ](https://www.cnblogs.com/shanfeng1000/p/13035758.html)
+[MongoDB](https://medium.com/@marekzyla95/mongo-repository-pattern-700986454a0e)
+[cqrs-validation-mediatr-fluentvalidation](https://github.com/CodeMazeBlog/cqrs-validation-mediatr-fluentvalidation)
+[eShopOnContainers](https://github.com/dotnet-architecture/eShopOnContainers)
+[cqrs-in-aspnet-core-3-1](https://codewithmukesh.com/blog/cqrs-in-aspnet-core-3-1/)

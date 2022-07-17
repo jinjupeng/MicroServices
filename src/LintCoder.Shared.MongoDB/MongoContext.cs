@@ -18,5 +18,14 @@ namespace LintCoder.Shared.MongoDB
         public IMongoClient Client => _client;
 
         public IMongoDatabase Database => _database;
+
+        public IMongoCollection<T> GetCollection<T>(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return null;
+            }
+            return _database.GetCollection<T>(name);
+        }
     }
 }
