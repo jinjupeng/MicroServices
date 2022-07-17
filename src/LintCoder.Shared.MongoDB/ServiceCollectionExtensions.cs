@@ -13,7 +13,7 @@ namespace LintCoder.Shared.MongoDB
             }
             services.Configure(mongoOptions);
             services.AddSingleton<MongoContext>();
-
+            services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
             return services;
         }
 
@@ -21,7 +21,7 @@ namespace LintCoder.Shared.MongoDB
         {
             services.Configure<MongoOptions>(configuration.GetSection(nameof(MongoOptions)));
             services.AddSingleton<MongoContext>();
-
+            services.AddScoped(typeof(IMongoRepository<>), typeof(MongoRepository<>));
             return services;
         }
 
