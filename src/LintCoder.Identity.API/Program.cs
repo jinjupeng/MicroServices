@@ -5,6 +5,7 @@ using LintCoder.Consul;
 using LintCoder.Identity.API.Application.Behaviors;
 using LintCoder.Identity.API.Application.Models.Enum;
 using LintCoder.Identity.API.Application.Models.Response;
+using LintCoder.Identity.API.Extensions;
 using LintCoder.Identity.API.HealthChecks;
 using LintCoder.Identity.API.Infrastructure.Authorization;
 using LintCoder.Identity.API.Infrastructure.Services;
@@ -80,7 +81,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddHealthChecks(builder.Configuration);
 builder.Services.AddConsul(builder.Configuration);
-
+builder.Services.AddRedisPollyHandler(builder.Configuration);
 RedisHelper.Initialization(new CSRedisClient(builder.Configuration.GetConnectionString("CSRedisConnection")));
 
 builder.Services.AddMongoOptions(builder.Configuration);
