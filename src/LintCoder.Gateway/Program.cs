@@ -1,6 +1,7 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
+using SkyApm.Utilities.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,8 @@ builder.Configuration.AddJsonFile("ocelot.json", optional: false, reloadOnChange
 builder.Configuration.AddJsonFile("ocelot.global.json", optional: false, reloadOnChange: true);
 builder.Configuration.AddJsonFile("ocelot.identity.api.json", optional: false, reloadOnChange: true);
 //builder.Services.AddSwaggerForOcelot(builder.Configuration);
-builder.Services.AddOcelot(builder.Configuration).AddConsul().AddConfigStoredInConsul();
+//builder.Services.AddOcelot(builder.Configuration).AddConsul().AddConfigStoredInConsul();
+builder.Services.AddSkyApmExtensions(); //ÃÌº”Skywalkingœ‡πÿ≈‰÷√
 
 
 var app = builder.Build();
@@ -33,7 +35,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-await app.UseOcelot();
+//await app.UseOcelot();
 
 app.UseAuthorization();
 
