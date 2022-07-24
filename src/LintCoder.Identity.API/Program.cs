@@ -88,6 +88,8 @@ builder.Services.AddMongoOptions(builder.Configuration);
 builder.Logging.ClearProviders();
 builder.Host.UseNLog();
 
+builder.Services.AddScoped<IdentityDbContextInitialiser>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -95,6 +97,15 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+
+    // Initialise and seed database
+    using (var scope = app.Services.CreateScope())
+    {
+        var initialiser = scope.ServiceProvider.GetRequiredService<IdentityDbContextInitialiser>();
+        await initialiser.InitializeAsync();
+        await initialiser.SeedAsync();
+    }
 }
 app.UseConsul(app.Lifetime);
 app.UseMiddleware<ExceptionHandlingMiddleware>();
