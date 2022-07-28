@@ -1,9 +1,11 @@
+using LintCoder.Identity.API.Infrastructure.Attributes;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LintCoder.Identity.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [ApiLog(LogLevel.Information, ApiLogEvent.WriteToConsole, ApiLogEvent.WriteToFile)]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -19,6 +21,7 @@ namespace LintCoder.Identity.API.Controllers
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
+        //[IgnoreApiLog]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

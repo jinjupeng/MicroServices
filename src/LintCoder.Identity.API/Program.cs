@@ -49,6 +49,8 @@ builder.Services.AddDbContext<IdentityDbContext>(options =>
         optionsSqlServer.MigrationsAssembly(typeof(Program).GetTypeInfo().Assembly.GetName().Name);
     })); 
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+builder.Services.AddTransient<RequestLogMiddleware>();
+builder.Services.AddTransient<ResponseLogMiddleware>();
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddJwtOptions(builder.Configuration);
 builder.Services.AddBasicAuthentication();
@@ -107,6 +109,8 @@ if (app.Environment.IsDevelopment())
         await initialiser.SeedAsync();
     }
 }
+// Log response info (for response pipeline: after ExceptionMiddleware)
+app.UseResponseLogMiddleware();
 app.UseConsul(app.Lifetime);
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
@@ -137,6 +141,9 @@ app.UseAuthorization();
 app.UseHealthChecks();
 
 app.MapControllers();
+
+// Log request info (for request pipeline: after Routing)
+app.UseRequestLogMiddleware();
 
 app.Run();
 
