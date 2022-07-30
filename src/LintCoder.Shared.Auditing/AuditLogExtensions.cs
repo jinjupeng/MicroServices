@@ -8,21 +8,17 @@ namespace LintCoder.Shared.Auditing
 {
     public static class AuditLogExtensions
     {
-        public static IAuditLogBuilder AddAuditLog(this IServiceCollection services)
+        public static AuditLogBuilder AddAuditLog(this IServiceCollection services)
         {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
-            services.AddSingleton<IAuditLogBuilder, AuditLogBuilder>();
-
-            IAuditLogBuilder builder = services.BuildServiceProvider().GetService<IAuditLogBuilder>();
-
-            return builder;
+            return new AuditLogBuilder(services);
         }
 
-        public static IAuditLogBuilder WriteToElastic(this IAuditLogBuilder auditLogBuilder, Action<AuditLogElasticOptions> elasticOptions)
+        public static AuditLogBuilder WriteToElastic(this AuditLogBuilder auditLogBuilder, Action<AuditLogElasticOptions> elasticOptions)
         {
             if (elasticOptions == null)
             {
@@ -35,7 +31,7 @@ namespace LintCoder.Shared.Auditing
             return auditLogBuilder;
         }
 
-        public static IAuditLogBuilder WriteToMongoDB(this IAuditLogBuilder auditLogBuilder, Action<MongoOptions> mongoOptions)
+        public static AuditLogBuilder WriteToMongoDB(this AuditLogBuilder auditLogBuilder, Action<MongoOptions> mongoOptions)
         {
             auditLogBuilder.Services.AddMongoOptions(mongoOptions);
 
@@ -44,7 +40,7 @@ namespace LintCoder.Shared.Auditing
             return auditLogBuilder;
         }
 
-        public static IAuditLogBuilder WriteToMongoDB(this IAuditLogBuilder auditLogBuilder, IConfiguration configuration)
+        public static AuditLogBuilder WriteToMongoDB(this AuditLogBuilder auditLogBuilder, IConfiguration configuration)
         {
             auditLogBuilder.Services.AddMongoOptions(configuration);
             auditLogBuilder.Services.AddScoped<IAuditingProvider<AuditLogMongoDBInfo>, AuditLogMongoDBHandler>();

@@ -2,7 +2,7 @@
 
 namespace LintCoder.Shared.Auditing
 {
-    public class AuditLogBuilder : IAuditLogBuilder
+    public class AuditLogBuilder
     {
         /// <summary>
         /// 获取 服务集合
