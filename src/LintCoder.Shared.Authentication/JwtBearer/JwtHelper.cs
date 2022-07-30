@@ -41,10 +41,10 @@ namespace LintCoder.Shared.Authentication.JwtBearer
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                new Claim(JwtClaimNames.UserName, uniqueName),
-                new Claim(JwtClaimNames.UserId, nameId),
-                new Claim(JwtClaimNames.NickName, name),
-                new Claim(JwtClaimNames.RoleIds, roleIds)
+                new Claim(JwtClaims.UserName, uniqueName),
+                new Claim(JwtClaims.UserId, nameId),
+                new Claim(JwtClaims.NickName, name),
+                new Claim(JwtClaims.RoleIds, roleIds)
             };
             return WriteToken(claims);
         }
@@ -116,7 +116,7 @@ namespace LintCoder.Shared.Authentication.JwtBearer
         /// <param name="refreshToken"></param>
         /// <param name="claimName"></param>
         /// <returns></returns>
-        public Claim GetClaimFromRefeshToken(string refreshToken, string claimName = JwtClaimNames.UserId)
+        public Claim GetClaimFromRefeshToken(string refreshToken, string claimName = JwtClaims.UserId)
         {
             var parameters = GenarateTokenValidationParameters();
             var tokenHandler = new JwtSecurityTokenHandler();

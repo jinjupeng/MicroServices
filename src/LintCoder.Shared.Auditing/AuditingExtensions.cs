@@ -6,12 +6,12 @@ namespace LintCoder.Shared.Auditing
     public static class AuditingExtensions
     {
 
-        public static IServiceCollection AddAuditing(this IServiceCollection services)
-        {
-            services.AddSingleton(new ProxyGenerator());
-            services.AddScoped<IInterceptor, AuditingInterceptor>();
+        //public static IServiceCollection AddAuditing(this IServiceCollection services)
+        //{
+        //    services.AddSingleton(new ProxyGenerator());
+        //    services.AddScoped<IInterceptor, AuditingInterceptor>();
 
-            return services;
-        }
+        //    return services;
+        //}
     }
 }

@@ -1,5 +1,6 @@
 using CSRedis;
 using FluentValidation;
+using LintCoder.Application.Common;
 using LintCoder.Base;
 using LintCoder.Consul;
 using LintCoder.Identity.API.Application.Behaviors;
@@ -12,6 +13,7 @@ using LintCoder.Identity.API.Infrastructure.Services;
 using LintCoder.Identity.API.Middlewares;
 using LintCoder.Identity.Infrastructure;
 using LintCoder.Identity.Infrastructure.Repositories;
+using LintCoder.Shared.Auditing;
 using LintCoder.Shared.Authentication;
 using LintCoder.Shared.Authorization;
 using LintCoder.Shared.MongoDB;
@@ -51,6 +53,7 @@ builder.Services.AddDbContext<IdentityDbContext>(options =>
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 builder.Services.AddTransient<RequestLogMiddleware>();
 builder.Services.AddTransient<ResponseLogMiddleware>();
+builder.Services.AddTransient<AuditLogMiddleware>();
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddJwtOptions(builder.Configuration);
 builder.Services.AddBasicAuthentication();
@@ -91,6 +94,22 @@ builder.Logging.ClearProviders();
 builder.Host.UseNLog();
 
 builder.Services.AddScoped<IdentityDbContextInitialiser>();
+
+#region AddCurrentUser
+
+builder.Services.AddScoped<CurrentUserMiddleware>()
+            .AddScoped<ICurrentUser, CurrentUser>()
+            .AddScoped(sp => (ICurrentUserInitializer)sp.GetRequiredService<ICurrentUser>());
+
+#endregion
+
+#region
+
+builder.Services.AddAuditLog()
+    .WriteToMongoDB(builder.Configuration);
+
+#endregion
+
 
 var app = builder.Build();
 
@@ -136,6 +155,9 @@ app.UseStatusCodePages(context => {
 
 app.UseAuthentication();
 
+// UseCurrentUser 
+app.UseMiddleware<CurrentUserMiddleware>();
+
 app.UseAuthorization();
 
 app.UseHealthChecks();
@@ -144,6 +166,8 @@ app.MapControllers();
 
 // Log request info (for request pipeline: after Routing)
 app.UseRequestLogMiddleware();
+
+app.UseMiddleware<AuditLogMiddleware>();
 
 app.Run();
 

@@ -72,10 +72,10 @@ namespace LintCoder.Shared.Authentication
                         {
                             var userContext = context.HttpContext.RequestServices.GetService<UserContext>();
                             var claims = context.Principal.Claims;
-                            userContext.Id = long.Parse(claims.First(x => x.Type == JwtClaimNames.UserId).Value);
-                            userContext.Account = claims.First(x => x.Type == JwtClaimNames.UserName).Value;
-                            userContext.Name = claims.First(x => x.Type == JwtClaimNames.NickName).Value;
-                            userContext.RoleIds = claims.First(x => x.Type == JwtClaimNames.RoleIds).Value;
+                            userContext.Id = long.Parse(claims.First(x => x.Type == JwtClaims.UserId).Value);
+                            userContext.Account = claims.First(x => x.Type == JwtClaims.UserName).Value;
+                            userContext.Name = claims.First(x => x.Type == JwtClaims.NickName).Value;
+                            userContext.RoleIds = claims.First(x => x.Type == JwtClaims.RoleIds).Value;
                             userContext.RemoteIpAddress = context.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
                             return Task.CompletedTask;
                         }
