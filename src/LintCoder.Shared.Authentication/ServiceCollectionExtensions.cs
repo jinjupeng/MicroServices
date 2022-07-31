@@ -1,4 +1,5 @@
-﻿using LintCoder.Shared.Authentication.JwtBearer;
+﻿using LintCoder.Application.Users;
+using LintCoder.Shared.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

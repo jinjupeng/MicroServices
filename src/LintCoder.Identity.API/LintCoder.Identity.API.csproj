@@ -48,8 +48,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LintCoder.Application\LintCoder.Application.csproj" />
-    <ProjectReference Include="..\LintCoder.Consul\LintCoder.Consul.csproj" />
     <ProjectReference Include="..\LintCoder.Identity.Infrastructure\LintCoder.Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\LintCoder.Infrastructure\LintCoder.Infrastructure.csproj" />
     <ProjectReference Include="..\LintCoder.Shared.Auditing\LintCoder.Shared.Auditing.csproj" />
     <ProjectReference Include="..\LintCoder.Shared.Authentication\LintCoder.Shared.Authentication.csproj" />
     <ProjectReference Include="..\LintCoder.Shared.Authorization\LintCoder.Shared.Authorization.csproj" />

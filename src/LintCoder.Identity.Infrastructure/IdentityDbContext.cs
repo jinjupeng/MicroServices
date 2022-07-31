@@ -1,7 +1,7 @@
-﻿using LintCoder.Base;
+﻿using LintCoder.Application.Users;
+using LintCoder.Base;
 using LintCoder.Identity.Domain.Entities;
 using LintCoder.Identity.Infrastructure.EntityConfigurations;
-using LintCoder.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 

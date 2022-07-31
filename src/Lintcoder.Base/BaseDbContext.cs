@@ -1,5 +1,5 @@
-﻿using LintCoder.Base.Entities;
-using LintCoder.Shared;
+﻿using LintCoder.Application.Users;
+using LintCoder.Base.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace LintCoder.Base

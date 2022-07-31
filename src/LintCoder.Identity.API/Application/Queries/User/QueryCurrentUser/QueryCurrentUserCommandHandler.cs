@@ -1,4 +1,5 @@
-﻿using LintCoder.Identity.API.Application.Models.Response;
+﻿using LintCoder.Application.Users;
+using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Infrastructure;
 using LintCoder.Shared;
 using MediatR;

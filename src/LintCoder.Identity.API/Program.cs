@@ -1,8 +1,7 @@
 using CSRedis;
 using FluentValidation;
-using LintCoder.Application.Common;
+using LintCoder.Application.Users;
 using LintCoder.Base;
-using LintCoder.Consul;
 using LintCoder.Identity.API.Application.Behaviors;
 using LintCoder.Identity.API.Application.Models.Enum;
 using LintCoder.Identity.API.Application.Models.Response;
@@ -13,6 +12,8 @@ using LintCoder.Identity.API.Infrastructure.Services;
 using LintCoder.Identity.API.Middlewares;
 using LintCoder.Identity.Infrastructure;
 using LintCoder.Identity.Infrastructure.Repositories;
+using LintCoder.Infrastructure.Consul;
+using LintCoder.Infrastructure.MultiTenancy;
 using LintCoder.Shared.Auditing;
 using LintCoder.Shared.Authentication;
 using LintCoder.Shared.Authorization;
@@ -110,6 +111,7 @@ builder.Services.AddAuditLog()
 
 #endregion
 
+builder.Services.AddMultitenancy(builder.Configuration);
 
 var app = builder.Build();
 
@@ -157,6 +159,8 @@ app.UseAuthentication();
 
 // UseCurrentUser 
 app.UseMiddleware<CurrentUserMiddleware>();
+
+app.UseMultiTenancy();
 
 app.UseAuthorization();
 

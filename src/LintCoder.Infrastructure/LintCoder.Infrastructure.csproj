@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+	<FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Consul" Version="1.6.10.6" />
+    <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+	<PackageReference Include="Finbuckle.MultiTenant" Version="6.7.3" />
+	<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.3" />
+	<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.3" />
+	<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LintCoder.Application\LintCoder.Application.csproj" />
+    <ProjectReference Include="..\LintCoder.Base\LintCoder.Base.csproj" />
+    <ProjectReference Include="..\LintCoder.Shared.Authentication\LintCoder.Shared.Authentication.csproj" />
+  </ItemGroup>
+</Project>

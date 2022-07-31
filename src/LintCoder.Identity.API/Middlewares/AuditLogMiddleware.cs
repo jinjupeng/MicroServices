@@ -1,4 +1,5 @@
 ﻿using LintCoder.Application.Common;
+using LintCoder.Application.Users;
 using LintCoder.Shared.Auditing;
 using LintCoder.Shared.Auditing.WriteToMonogDB;
 using Microsoft.AspNetCore.Http.Features;

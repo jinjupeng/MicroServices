@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.6" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LintCoder.Shared\LintCoder.Shared.csproj" />
+    <ProjectReference Include="..\LintCoder.Application\LintCoder.Application.csproj" />
   </ItemGroup>
 
 </Project>

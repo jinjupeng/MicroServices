@@ -1,4 +1,4 @@
-﻿using LintCoder.Application.Common;
+﻿using LintCoder.Application.Users;
 using LintCoder.Identity.API.Extensions;
 using System.Security.Claims;
 

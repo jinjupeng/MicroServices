@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace LintCoder.Application.Common
+namespace LintCoder.Application.Users
 {
     public interface ICurrentUser
     {
