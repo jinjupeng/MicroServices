@@ -1,5 +1,5 @@
-﻿using LintCoder.Base;
-using LintCoder.Identity.Domain.Entities;
+﻿using LintCoder.Identity.Domain.Entities;
+using LintCoder.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace LintCoder.Identity.API.Infrastructure.Services

@@ -1,6 +1,6 @@
 ﻿using Finbuckle.MultiTenant;
 using LintCoder.Application.Multitenancy;
-using LintCoder.Base.Entities;
+using LintCoder.Domain.Common;
 
 namespace LintCoder.Infrastructure.MultiTenancy
 {

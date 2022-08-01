@@ -1,4 +1,4 @@
-﻿using LintCoder.Application.Users;
+﻿using LintCoder.Application.Common.Interfaces;
 using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Infrastructure;
 using LintCoder.Shared;
@@ -10,9 +10,9 @@ namespace LintCoder.Identity.API.Application.Queries.User.QueryCurrentUser
     public class QueryCurrentUserCommandHandler : IRequestHandler<QueryCurrentUserCommand, MsgModel>
     {
         private readonly IdentityDbContext dbContext;
-        private readonly UserContext userContext;
+        private readonly ICurrentUser userContext;
 
-        public QueryCurrentUserCommandHandler(IdentityDbContext dbContext, UserContext userContext)
+        public QueryCurrentUserCommandHandler(IdentityDbContext dbContext, ICurrentUser userContext)
         {
             this.dbContext = dbContext;
             this.userContext = userContext;
@@ -20,7 +20,7 @@ namespace LintCoder.Identity.API.Application.Queries.User.QueryCurrentUser
 
         public async Task<MsgModel> Handle(QueryCurrentUserCommand request, CancellationToken cancellationToken)
         {
-            var currentUser = await dbContext.SysUser.AsNoTracking().FirstOrDefaultAsync(x => x.Id == userContext.Id);
+            var currentUser = await dbContext.SysUser.AsNoTracking().FirstOrDefaultAsync(x => x.Id == long.Parse(userContext.Id.ToString()));
             if(currentUser == null)
             {
                 return MsgModel.Fail("用户不存在！");

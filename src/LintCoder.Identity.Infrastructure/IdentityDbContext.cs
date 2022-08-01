@@ -1,15 +1,14 @@
-﻿using LintCoder.Application.Users;
-using LintCoder.Base;
+﻿using LintCoder.Application.Common.Interfaces;
 using LintCoder.Identity.Domain.Entities;
 using LintCoder.Identity.Infrastructure.EntityConfigurations;
-using Microsoft.AspNetCore.Http;
+using LintCoder.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace LintCoder.Identity.Infrastructure
 {
     public class IdentityDbContext : BaseDbContext
     {
-        public IdentityDbContext(DbContextOptions options, UserContext userContext) : base(options, userContext)
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> options, ICurrentUser userContext) : base(options, userContext)
         {
         }
 

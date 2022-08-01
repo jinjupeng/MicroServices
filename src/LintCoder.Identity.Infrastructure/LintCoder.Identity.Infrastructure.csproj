@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lintcoder.Base\LintCoder.Base.csproj" />
     <ProjectReference Include="..\LintCoder.Identity.Core\LintCoder.Identity.Domain.csproj" />
+    <ProjectReference Include="..\LintCoder.Infrastructure\LintCoder.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,11 @@
 ﻿using LintCoder.Application.Multitenancy;
-using LintCoder.Shared.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Microsoft.EntityFrameworkCore;
+using LintCoder.Infrastructure.Users;
 
 namespace LintCoder.Infrastructure.MultiTenancy
 {
@@ -18,7 +18,7 @@ namespace LintCoder.Infrastructure.MultiTenancy
                     options.UseSqlServer(config.GetConnectionString("DefaultConnection"))
                 )
                 .AddMultiTenant<TenantEntity>()
-                    .WithClaimStrategy(JwtClaims.Tenant)
+                    .WithClaimStrategy(LintCoderClaims.TenantId)
                     .WithHeaderStrategy(MultitenancyConstants.TenantIdName)
                     .WithQueryStringStrategy(MultitenancyConstants.TenantIdName)
                     .WithEFCoreStore<TenantDbContext, TenantEntity>()

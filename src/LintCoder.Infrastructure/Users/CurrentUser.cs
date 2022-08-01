@@ -1,14 +1,32 @@
-﻿using LintCoder.Application.Users;
-using LintCoder.Identity.API.Extensions;
+﻿using LintCoder.Application.Common.Interfaces;
 using System.Security.Claims;
 
-namespace LintCoder.Identity.API.Infrastructure.Authorization
-{
+namespace LintCoder.Infrastructure.Users 
+{ 
+
     public class CurrentUser : ICurrentUser, ICurrentUserInitializer
     {
         private ClaimsPrincipal? _user;
 
         public string? Name => _user?.Identity?.Name;
+
+        public Guid? Id => throw new NotImplementedException();
+
+        public string UserName => throw new NotImplementedException();
+
+        public string PhoneNumber => throw new NotImplementedException();
+
+        public bool PhoneNumberVerified => throw new NotImplementedException();
+
+        public string Email => throw new NotImplementedException();
+
+        public bool EmailVerified => throw new NotImplementedException();
+
+        public Guid? TenantId => throw new NotImplementedException();
+
+        public string[] Roles => throw new NotImplementedException();
+
+        Guid ICurrentUser.Id => throw new NotImplementedException();
 
         private Guid _userId = Guid.Empty;
 
@@ -55,6 +73,21 @@ namespace LintCoder.Identity.API.Infrastructure.Authorization
             {
                 _userId = Guid.Parse(userId);
             }
+        }
+
+        public Claim FindClaim(string claimType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Claim[] FindClaims(string claimType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Claim[] GetAllClaims()
+        {
+            throw new NotImplementedException();
         }
     }
 }

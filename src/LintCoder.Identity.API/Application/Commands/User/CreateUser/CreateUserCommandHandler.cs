@@ -1,8 +1,8 @@
 ﻿using Common.Utility.Utils;
-using LintCoder.Base;
 using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Domain.Entities;
 using LintCoder.Identity.Infrastructure;
+using LintCoder.Infrastructure.Persistence;
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

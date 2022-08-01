@@ -1,7 +1,7 @@
 ﻿using Common.Utility.Utils;
 using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Infrastructure;
-using LintCoder.Shared.Authentication.JwtBearer;
+using LintCoder.Infrastructure.Auth.JwtBearer;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json;

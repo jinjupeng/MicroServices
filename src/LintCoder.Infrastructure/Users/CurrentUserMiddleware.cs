@@ -1,6 +1,7 @@
-﻿using LintCoder.Identity.API.Infrastructure.Authorization;
+﻿using LintCoder.Application.Common.Interfaces;
+using Microsoft.AspNetCore.Http;
 
-namespace LintCoder.Identity.API.Middlewares
+namespace LintCoder.Infrastructure
 {
     public class CurrentUserMiddleware : IMiddleware
     {

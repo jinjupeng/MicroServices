@@ -1,6 +1,5 @@
-﻿using LintCoder.Identity.API.Application.Models.Enum;
-using LintCoder.Identity.API.Application.Models.Response;
-using LintCoder.Shared.Authentication.JwtBearer;
+﻿using LintCoder.Identity.API.Application.Models.Response;
+using LintCoder.Infrastructure.Auth.JwtBearer;
 using MediatR;
 using Microsoft.Extensions.Primitives;
 

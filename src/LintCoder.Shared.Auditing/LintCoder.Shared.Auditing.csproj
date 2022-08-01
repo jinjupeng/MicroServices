@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LintCoder.Base\LintCoder.Base.csproj" />
     <ProjectReference Include="..\LintCoder.Shared.MongoDB\LintCoder.Shared.MongoDB.csproj" />
   </ItemGroup>
 

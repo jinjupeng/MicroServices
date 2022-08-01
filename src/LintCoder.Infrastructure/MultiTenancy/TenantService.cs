@@ -2,21 +2,16 @@
 using LintCoder.Application.Common.Exceptions;
 using LintCoder.Application.Multitenancy;
 using Mapster;
-using Microsoft.Extensions.Localization;
 
 namespace LintCoder.Infrastructure.MultiTenancy
 {
     internal class TenantService : ITenantService
     {
         private readonly IMultiTenantStore<TenantEntity> _tenantStore;
-        private readonly IStringLocalizer _t;
 
-        public TenantService(
-            IMultiTenantStore<TenantEntity> tenantStore,
-            IStringLocalizer<TenantService> localizer)
+        public TenantService(IMultiTenantStore<TenantEntity> tenantStore)
         {
             _tenantStore = tenantStore;
-            _t = localizer;
         }
 
         public async Task<List<TenantDto>> GetAllAsync()
@@ -49,14 +44,14 @@ namespace LintCoder.Infrastructure.MultiTenancy
 
             if (tenant.IsActive)
             {
-                throw new ConflictException(_t["Tenant is already Activated."]);
+                throw new ConflictException("Tenant is already Activated.");
             }
 
             tenant.Activate();
 
             await _tenantStore.TryUpdateAsync(tenant);
 
-            return _t["Tenant {0} is now Activated.", id];
+            return $"Tenant {id} is now Activated.";
         }
 
         public async Task<string> DeactivateAsync(string id)
@@ -65,14 +60,14 @@ namespace LintCoder.Infrastructure.MultiTenancy
 
             if (!tenant.IsActive)
             {
-                throw new ConflictException(_t["Tenant is already Deactivated."]);
+                throw new ConflictException("Tenant is already Deactivated.");
             }
 
             tenant.Deactivate();
 
             await _tenantStore.TryUpdateAsync(tenant);
 
-            return _t[$"Tenant {0} is now Deactivated.", id];
+            return $"Tenant {id} is now Deactivated.";
         }
 
         public async Task<string> UpdateSubscription(string id, DateTime extendedExpiryDate)
@@ -83,11 +78,11 @@ namespace LintCoder.Infrastructure.MultiTenancy
 
             await _tenantStore.TryUpdateAsync(tenant);
 
-            return _t[$"Tenant {0}'s Subscription Upgraded. Now Valid till {1}.", id, tenant.ValidUpto];
+            return $"Tenant {id}'s Subscription Upgraded. Now Valid till {tenant.ValidUpto}.";
         }
 
         private async Task<TenantEntity> GetTenantInfoAsync(string id) =>
             await _tenantStore.TryGetAsync(id)
-                ?? throw new NotFoundException(_t["{0} {1} Not Found.", typeof(TenantEntity).Name, id]);
+                ?? throw new NotFoundException($"{typeof(TenantEntity).Name} {id} Not Found.");
     }
 }

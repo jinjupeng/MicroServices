@@ -1,4 +1,4 @@
-﻿using LintCoder.Application.Users;
+﻿using LintCoder.Application.Common.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,10 +18,10 @@ namespace LintCoder.Shared.Authorization
                     return;
                 }
 
-                var userContext = httpContext.RequestServices.GetService<UserContext>();
+                var userContext = httpContext.RequestServices.GetService<ICurrentUser>();
                 // 请求Url
                 var requestPermission = httpContext.Request.Path.Value.ToLower().Replace("/api", "");
-                var result = await CheckUserPermissions(userContext.Id, new List<string> { requestPermission }, userContext.RoleIds);
+                var result = await CheckUserPermissions(long.Parse(userContext.Id.ToString()), new List<string> { requestPermission }, userContext.Roles);
                 if (result)
                 {
                     context.Succeed(requirement);
@@ -31,6 +31,6 @@ namespace LintCoder.Shared.Authorization
             context.Fail();
         }
 
-        protected abstract Task<bool> CheckUserPermissions(long userId, IEnumerable<string> requestPermissions, string userBelongsRoleIds);
+        protected abstract Task<bool> CheckUserPermissions(long userId, IEnumerable<string> requestPermissions, IEnumerable<string> userBelongsRoleIds);
     }
 }

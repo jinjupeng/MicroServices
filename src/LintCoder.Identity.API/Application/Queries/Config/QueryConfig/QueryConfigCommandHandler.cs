@@ -1,7 +1,6 @@
-﻿using LintCoder.Application.Users;
+﻿using LintCoder.Application.Common.Interfaces;
 using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Infrastructure;
-using LintCoder.Shared;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,9 +9,9 @@ namespace LintCoder.Identity.API.Application.Queries.Config.QueryConfig
     public class QueryConfigCommandHandler : IRequestHandler<QueryConfigCommand, MsgModel>
     {
         private readonly IdentityDbContext dbContext;
-        private readonly UserContext userContext;
+        private readonly ICurrentUser userContext;
 
-        public QueryConfigCommandHandler(IdentityDbContext dbContext, UserContext userContext)
+        public QueryConfigCommandHandler(IdentityDbContext dbContext, ICurrentUser userContext)
         {
             this.dbContext = dbContext;
             this.userContext = userContext;

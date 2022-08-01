@@ -1,4 +1,4 @@
-﻿using LintCoder.Base;
+﻿using LintCoder.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;

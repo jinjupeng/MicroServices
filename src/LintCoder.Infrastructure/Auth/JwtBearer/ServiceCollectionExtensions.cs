@@ -1,12 +1,10 @@
-﻿using LintCoder.Application.Users;
-using LintCoder.Shared.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace LintCoder.Shared.Authentication
+namespace LintCoder.Infrastructure.Auth.JwtBearer
 {
     /// <summary>
     /// 扩展
@@ -30,13 +28,6 @@ namespace LintCoder.Shared.Authentication
             var jwtOptionsConfig = configuration.GetSection(nameof(JwtOptions));
             services.Configure<JwtOptions>(jwtOptionsConfig);
             services.AddSingleton<JwtHelper>();
-
-            return services;
-        }
-
-        public static IServiceCollection AddUserContext(this IServiceCollection services)
-        {
-            services.AddScoped<UserContext>();
 
             return services;
         }
@@ -71,13 +62,6 @@ namespace LintCoder.Shared.Authentication
                         },
                         OnTokenValidated = (context) =>
                         {
-                            var userContext = context.HttpContext.RequestServices.GetService<UserContext>();
-                            var claims = context.Principal.Claims;
-                            userContext.Id = long.Parse(claims.First(x => x.Type == JwtClaims.UserId).Value);
-                            userContext.Account = claims.First(x => x.Type == JwtClaims.UserName).Value;
-                            userContext.Name = claims.First(x => x.Type == JwtClaims.NickName).Value;
-                            userContext.RoleIds = claims.First(x => x.Type == JwtClaims.RoleIds).Value;
-                            userContext.RemoteIpAddress = context.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
                             return Task.CompletedTask;
                         }
                     };

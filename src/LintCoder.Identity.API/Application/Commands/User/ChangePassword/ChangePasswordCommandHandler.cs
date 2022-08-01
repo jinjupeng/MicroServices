@@ -1,8 +1,7 @@
 ﻿using Common.Utility.Utils;
-using LintCoder.Application.Users;
+using LintCoder.Application.Common.Interfaces;
 using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Infrastructure;
-using LintCoder.Shared;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,9 +10,9 @@ namespace LintCoder.Identity.API.Application.Commands.User.ChangePassword
     public class ChangePasswordCommandHandler : IRequestHandler<ChangePasswordCommand, MsgModel>
     {
         private readonly IdentityDbContext dbContext;
-        private readonly UserContext userContext;
+        private readonly ICurrentUser userContext;
 
-        public ChangePasswordCommandHandler(IdentityDbContext dbContext, UserContext userContext)
+        public ChangePasswordCommandHandler(IdentityDbContext dbContext, ICurrentUser userContext)
         {
             this.dbContext = dbContext;
             this.userContext = userContext;
@@ -21,7 +20,7 @@ namespace LintCoder.Identity.API.Application.Commands.User.ChangePassword
 
         public async Task<MsgModel> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
         {
-            var currentUser = await dbContext.SysUser.FirstOrDefaultAsync(x => x.Id == userContext.Id);
+            var currentUser = await dbContext.SysUser.FirstOrDefaultAsync(x => x.Id == long.Parse(userContext.Id.ToString()));
             if (currentUser == null)
             {
                 return MsgModel.Fail("用户不存在！");

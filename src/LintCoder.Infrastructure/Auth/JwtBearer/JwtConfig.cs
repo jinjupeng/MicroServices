@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace LintCoder.Shared.Authentication.JwtBearer
+namespace LintCoder.Infrastructure.Auth.JwtBearer
 {
     /// <summary>
     /// JWT配置

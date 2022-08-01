@@ -1,16 +1,10 @@
-﻿using LintCoder.Application.Users;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace LintCoder.Shared.Authentication.JwtBearer
+namespace LintCoder.Infrastructure.Auth.JwtBearer
 {
     public static class JwtTokenHelper
     {
@@ -46,25 +40,16 @@ namespace LintCoder.Shared.Authentication.JwtBearer
                     ,
                 //在Token验证通过后调用
                 OnTokenValidated = context =>
-                    {
-                        var userContext = context.HttpContext.RequestServices.GetService<UserContext>();
-                        var claims = context.Principal.Claims;
-                        userContext.Id = long.Parse(claims.First(x => x.Type == JwtRegisteredClaimNames.NameId).Value);
-                        userContext.Account = claims.First(x => x.Type == JwtRegisteredClaimNames.UniqueName).Value;
-                        userContext.Name = claims.First(x => x.Type == JwtRegisteredClaimNames.Name).Value;
-                        userContext.RemoteIpAddress = context.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
-                        return Task.CompletedTask;
-                    }
-                     ,
+                {
+                    return Task.CompletedTask;
+                },
                 //认证失败时调用
                 OnAuthenticationFailed = context =>
-                    {
-                        //如果是过期，在http heard中加入act参数
-                        if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
-                            context.Response.Headers.Add("act", "expired");
-                        return Task.CompletedTask;
-                    }
-                    ,
+                {
+                    if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))//如果是过期，在http heard中加入act参数
+                        context.Response.Headers.Add("act", "expired");
+                    return Task.CompletedTask;
+                },
                 //未授权时调用
                 OnChallenge = context => Task.CompletedTask
             };

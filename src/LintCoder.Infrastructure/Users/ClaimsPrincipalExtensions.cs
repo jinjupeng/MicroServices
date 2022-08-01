@@ -1,7 +1,6 @@
-﻿using LintCoder.Shared.Authentication.JwtBearer;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
-namespace LintCoder.Identity.API.Extensions
+namespace LintCoder.Infrastructure.Users
 {
     public static class ClaimsPrincipalExtensions
     {
@@ -9,10 +8,10 @@ namespace LintCoder.Identity.API.Extensions
             => principal.FindFirstValue(ClaimTypes.Email);
 
         public static string? GetTenant(this ClaimsPrincipal principal)
-            => principal.FindFirstValue(JwtClaims.Tenant);
+            => principal.FindFirstValue(LintCoderClaims.TenantId);
 
         public static string? GetFullName(this ClaimsPrincipal principal)
-            => principal?.FindFirst(JwtClaims.Fullname)?.Value;
+            => principal?.FindFirst(LintCoderClaims.FullName)?.Value;
 
         public static string? GetFirstName(this ClaimsPrincipal principal)
             => principal?.FindFirst(ClaimTypes.Name)?.Value;
@@ -27,11 +26,11 @@ namespace LintCoder.Identity.API.Extensions
            => principal.FindFirstValue(ClaimTypes.NameIdentifier);
 
         public static string? GetImageUrl(this ClaimsPrincipal principal)
-           => principal.FindFirstValue(JwtClaims.ImageUrl);
+           => principal.FindFirstValue(LintCoderClaims.ImageUrl);
 
         public static DateTimeOffset GetExpiration(this ClaimsPrincipal principal) =>
             DateTimeOffset.FromUnixTimeSeconds(Convert.ToInt64(
-                principal.FindFirstValue(JwtClaims.Expiration)));
+                principal.FindFirstValue(LintCoderClaims.Expiration)));
 
         private static string? FindFirstValue(this ClaimsPrincipal principal, string claimType) =>
             principal is null

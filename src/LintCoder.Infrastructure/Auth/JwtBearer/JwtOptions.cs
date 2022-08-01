@@ -1,7 +1,7 @@
 ﻿using Common.Utility.Extensions;
 using System.Diagnostics.CodeAnalysis;
 
-namespace LintCoder.Shared.Authentication.JwtBearer
+namespace LintCoder.Infrastructure.Auth.JwtBearer
 {
     [ExcludeFromCodeCoverage]
     public class JwtOptions

@@ -25,6 +25,7 @@
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.7" />
     <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.2.0" />
+    <PackageReference Include="My.Common.Utility" Version="2.1.1" />
     <PackageReference Include="NLog" Version="5.0.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="5.0.1" />
     <PackageReference Include="NLog.Mongo" Version="4.6.0.191" />
@@ -51,7 +52,6 @@
     <ProjectReference Include="..\LintCoder.Identity.Infrastructure\LintCoder.Identity.Infrastructure.csproj" />
     <ProjectReference Include="..\LintCoder.Infrastructure\LintCoder.Infrastructure.csproj" />
     <ProjectReference Include="..\LintCoder.Shared.Auditing\LintCoder.Shared.Auditing.csproj" />
-    <ProjectReference Include="..\LintCoder.Shared.Authentication\LintCoder.Shared.Authentication.csproj" />
     <ProjectReference Include="..\LintCoder.Shared.Authorization\LintCoder.Shared.Authorization.csproj" />
     <ProjectReference Include="..\LintCoder.Shared.MongoDB\LintCoder.Shared.MongoDB.csproj" />
   </ItemGroup>

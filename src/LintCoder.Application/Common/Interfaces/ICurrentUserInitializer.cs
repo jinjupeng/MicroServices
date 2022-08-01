@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 
-namespace LintCoder.Identity.API.Infrastructure.Authorization
+namespace LintCoder.Application.Common.Interfaces
 {
     public interface ICurrentUserInitializer
     {

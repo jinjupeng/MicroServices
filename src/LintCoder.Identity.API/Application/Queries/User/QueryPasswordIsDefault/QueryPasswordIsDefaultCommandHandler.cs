@@ -1,5 +1,5 @@
 ﻿using Common.Utility.Utils;
-using LintCoder.Application.Users;
+using LintCoder.Application.Common.Interfaces;
 using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Infrastructure;
 using MediatR;
@@ -10,9 +10,9 @@ namespace LintCoder.Identity.API.Application.Queries.User.QueryPasswordIsDefault
     public class QueryPasswordIsDefaultCommandHandler : IRequestHandler<QueryPasswordIsDefaultCommand, MsgModel>
     {
         private readonly IdentityDbContext dbContext;
-        private readonly UserContext userContext;
+        private readonly ICurrentUser userContext;
 
-        public QueryPasswordIsDefaultCommandHandler(IdentityDbContext dbContext, UserContext userContext)
+        public QueryPasswordIsDefaultCommandHandler(IdentityDbContext dbContext, ICurrentUser userContext)
         {
             this.dbContext = dbContext;
             this.userContext = userContext;
@@ -20,7 +20,7 @@ namespace LintCoder.Identity.API.Application.Queries.User.QueryPasswordIsDefault
 
         public async Task<MsgModel> Handle(QueryPasswordIsDefaultCommand request, CancellationToken cancellationToken)
         {
-            var currentUser = await dbContext.SysUser.AsNoTracking().FirstOrDefaultAsync(x => x.Id == userContext.Id);
+            var currentUser = await dbContext.SysUser.AsNoTracking().FirstOrDefaultAsync(x => x.Id == long.Parse(userContext.Id.ToString()));
             if (currentUser == null)
             {
                 return MsgModel.Fail("用户不存在！");

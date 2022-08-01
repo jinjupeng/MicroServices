@@ -1,5 +1,4 @@
-﻿using LintCoder.Base.Entities;
-using System.Text;
+﻿using System.Text;
 
 namespace LintCoder.Shared.Auditing
 {

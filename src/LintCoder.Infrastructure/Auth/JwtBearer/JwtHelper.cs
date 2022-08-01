@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.Options;
+﻿using LintCoder.Infrastructure.Users;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace LintCoder.Shared.Authentication.JwtBearer
+namespace LintCoder.Infrastructure.Auth.JwtBearer
 {
     /// <summary>
     /// jwt帮助类
@@ -41,10 +42,10 @@ namespace LintCoder.Shared.Authentication.JwtBearer
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                new Claim(JwtClaims.UserName, uniqueName),
-                new Claim(JwtClaims.UserId, nameId),
-                new Claim(JwtClaims.NickName, name),
-                new Claim(JwtClaims.RoleIds, roleIds)
+                new Claim(LintCoderClaims.UserName, uniqueName),
+                new Claim(LintCoderClaims.UserId, nameId),
+                new Claim(LintCoderClaims.FullName, name),
+                new Claim(LintCoderClaims.Role, roleIds)
             };
             return WriteToken(claims);
         }
@@ -116,7 +117,7 @@ namespace LintCoder.Shared.Authentication.JwtBearer
         /// <param name="refreshToken"></param>
         /// <param name="claimName"></param>
         /// <returns></returns>
-        public Claim GetClaimFromRefeshToken(string refreshToken, string claimName = JwtClaims.UserId)
+        public Claim GetClaimFromRefeshToken(string refreshToken, string claimName)
         {
             var parameters = GenarateTokenValidationParameters();
             var tokenHandler = new JwtSecurityTokenHandler();

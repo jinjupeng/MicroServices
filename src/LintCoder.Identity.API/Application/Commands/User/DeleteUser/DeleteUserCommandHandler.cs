@@ -1,6 +1,6 @@
-﻿using LintCoder.Base;
-using LintCoder.Identity.API.Application.Models.Response;
+﻿using LintCoder.Identity.API.Application.Models.Response;
 using LintCoder.Identity.Domain.Entities;
+using LintCoder.Infrastructure.Persistence;
 using MediatR;
 
 namespace LintCoder.Identity.API.Application.Commands.User.DeleteUser

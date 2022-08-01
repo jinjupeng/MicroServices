@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Consul" Version="1.6.10.6" />
     <PackageReference Include="Mapster" Version="7.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
@@ -19,10 +20,10 @@
 	<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" Version="6.7.3" />
 	<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.7.3" />
 	<PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions" Version="6.0.7" />
+	<PackageReference Include="My.Common.Utility" Version="2.1.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LintCoder.Application\LintCoder.Application.csproj" />
-    <ProjectReference Include="..\LintCoder.Base\LintCoder.Base.csproj" />
-    <ProjectReference Include="..\LintCoder.Shared.Authentication\LintCoder.Shared.Authentication.csproj" />
+    <ProjectReference Include="..\LintCoder.Domain\LintCoder.Domain.csproj" />
   </ItemGroup>
 </Project>

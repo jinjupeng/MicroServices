@@ -16,4 +16,8 @@
     <ProjectReference Include="..\LintCoder.Application\LintCoder.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="JwtBearer\" />
+  </ItemGroup>
+
 </Project>

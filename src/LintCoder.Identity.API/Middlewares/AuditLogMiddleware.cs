@@ -1,5 +1,4 @@
-﻿using LintCoder.Application.Common;
-using LintCoder.Application.Users;
+﻿using LintCoder.Application.Common.Interfaces;
 using LintCoder.Shared.Auditing;
 using LintCoder.Shared.Auditing.WriteToMonogDB;
 using Microsoft.AspNetCore.Http.Features;
@@ -80,7 +79,7 @@ namespace LintCoder.Identity.API.Middlewares
                 ClientIpAddress = context?.Connection?.RemoteIpAddress?.ToString(),
                 Url = url,
                 UserId = currentUser.GetUserId(),
-                UserName = currentUser.Name,
+                UserName = currentUser.UserName,
                 ApplicationName = "LintCoder.Idenitty.API",
                 CorrelationId = "",
                 HttpMethod = context?.Request.Method,

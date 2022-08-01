@@ -1,7 +1,5 @@
 using CSRedis;
 using FluentValidation;
-using LintCoder.Application.Users;
-using LintCoder.Base;
 using LintCoder.Identity.API.Application.Behaviors;
 using LintCoder.Identity.API.Application.Models.Enum;
 using LintCoder.Identity.API.Application.Models.Response;
@@ -12,10 +10,12 @@ using LintCoder.Identity.API.Infrastructure.Services;
 using LintCoder.Identity.API.Middlewares;
 using LintCoder.Identity.Infrastructure;
 using LintCoder.Identity.Infrastructure.Repositories;
+using LintCoder.Infrastructure;
+using LintCoder.Infrastructure.Auth.JwtBearer;
 using LintCoder.Infrastructure.Consul;
 using LintCoder.Infrastructure.MultiTenancy;
+using LintCoder.Infrastructure.Persistence;
 using LintCoder.Shared.Auditing;
-using LintCoder.Shared.Authentication;
 using LintCoder.Shared.Authorization;
 using LintCoder.Shared.MongoDB;
 using MediatR;
@@ -59,7 +59,6 @@ builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>
 builder.Services.AddJwtOptions(builder.Configuration);
 builder.Services.AddBasicAuthentication();
 builder.Services.AddAuthorization<PermissionLocalHandler>();
-builder.Services.AddUserContext();
 
 //builder.Services.AddMediatR(typeof(Program).Assembly);
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
@@ -96,13 +95,8 @@ builder.Host.UseNLog();
 
 builder.Services.AddScoped<IdentityDbContextInitialiser>();
 
-#region AddCurrentUser
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddScoped<CurrentUserMiddleware>()
-            .AddScoped<ICurrentUser, CurrentUser>()
-            .AddScoped(sp => (ICurrentUserInitializer)sp.GetRequiredService<ICurrentUser>());
-
-#endregion
 
 #region
 
