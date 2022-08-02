@@ -1,4 +1,6 @@
 using LintCoder.Identity.API.Infrastructure.Attributes;
+using LintCoder.Infrastructure.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LintCoder.Identity.API.Controllers
@@ -20,6 +22,7 @@ namespace LintCoder.Identity.API.Controllers
             _logger = logger;
         }
 
+        [LCRoleAuthorize(LCRoleConstants.Basic)]
         [HttpGet(Name = "GetWeatherForecast")]
         //[IgnoreApiLog]
         public IEnumerable<WeatherForecast> Get()

@@ -1,5 +1,4 @@
-﻿using Finbuckle.MultiTenant.EntityFrameworkCore;
-using LintCoder.Identity.Domain.Entities;
+﻿using LintCoder.Identity.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,8 +13,6 @@ namespace LintCoder.Identity.Infrastructure.EntityConfigurations
             builder.HasKey(user => user.Id);
 
             builder.Property(user => user.Id).ValueGeneratedOnAdd();
-
-            builder.IsMultiTenant();
         }
     }
 }

@@ -13,7 +13,6 @@ using LintCoder.Identity.Infrastructure.Repositories;
 using LintCoder.Infrastructure;
 using LintCoder.Infrastructure.Auth.JwtBearer;
 using LintCoder.Infrastructure.Consul;
-using LintCoder.Infrastructure.MultiTenancy;
 using LintCoder.Infrastructure.Persistence;
 using LintCoder.Shared.Auditing;
 using LintCoder.Shared.Authorization;
@@ -57,7 +56,6 @@ builder.Services.AddTransient<ResponseLogMiddleware>();
 builder.Services.AddTransient<AuditLogMiddleware>();
 builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddJwtOptions(builder.Configuration);
-builder.Services.AddBasicAuthentication();
 builder.Services.AddAuthorization<PermissionLocalHandler>();
 
 //builder.Services.AddMediatR(typeof(Program).Assembly);
@@ -105,8 +103,6 @@ builder.Services.AddAuditLog()
 
 #endregion
 
-builder.Services.AddMultitenancy(builder.Configuration);
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -153,8 +149,6 @@ app.UseAuthentication();
 
 // UseCurrentUser 
 app.UseMiddleware<CurrentUserMiddleware>();
-
-app.UseMultiTenancy();
 
 app.UseAuthorization();
 

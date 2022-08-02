@@ -33,7 +33,7 @@ namespace LintCoder.Infrastructure.Auth.JwtBearer
         }
 
 
-        public static IServiceCollection AddBasicAuthentication(this IServiceCollection services)
+        public static IServiceCollection AddLCAuthentication(this IServiceCollection services)
         {
             var jwtOptions = services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>().Value;
             var jwtHelper = services.BuildServiceProvider().GetService<JwtHelper>();
