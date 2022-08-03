@@ -27,10 +27,10 @@ namespace LintCoder.Infrastructure.Authentation.JwtBearer
                 new Claim(LintCoderClaims.UserName, tokenRequest.UserName),
                 new Claim(LintCoderClaims.UserId, tokenRequest.UserId),
                 new Claim(LintCoderClaims.FullName, tokenRequest.UserName),
-                new Claim(LintCoderClaims.Role, string.Join(",", tokenRequest.Roles)),
+                new Claim(LintCoderClaims.RoleCode, string.Join(",", tokenRequest.Roles)),
                 new Claim(LintCoderClaims.TenantId, tokenRequest.TennantId),
                 new Claim(LintCoderClaims.PhoneNumber, tokenRequest.PhoneNumber),
-                new Claim(LintCoderClaims.Email, tokenRequest.Email),
+                new Claim(LintCoderClaims.EmailAddress, tokenRequest.Email),
                 new Claim(LintCoderClaims.EmailVerified, tokenRequest.IsEmailConfirmed.ToString()),
                 new Claim(LintCoderClaims.PhoneNumberVerified, tokenRequest.PhoneNumberVerified.ToString())
             };

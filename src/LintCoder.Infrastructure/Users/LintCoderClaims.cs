@@ -14,11 +14,11 @@ namespace LintCoder.Infrastructure.Users
 
         /// <summary>
         /// </summary>
-        public static string Role { get; set; } = "role";
+        public static string RoleCode { get; set; } = "role_code";
 
         /// <summary>
         /// </summary>
-        public static string Email { get; set; } = "email";
+        public static string EmailAddress { get; set; } = "email_adress";
 
         /// <summary>
         /// Default: "full_name".

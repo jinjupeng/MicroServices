@@ -26,7 +26,7 @@ namespace LintCoder.Infrastructure.Users
 
         public static string[] GetRoles(this ClaimsPrincipal principal)
         {
-            var claimValue = principal.FindFirstValue(LintCoderClaims.Role);
+            var claimValue = principal.FindFirstValue(LintCoderClaims.RoleCode);
             if (string.IsNullOrEmpty(claimValue))
             {
                 return Array.Empty<string>();
