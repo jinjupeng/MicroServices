@@ -4,19 +4,7 @@ namespace LintCoder.Application.Common.Interfaces
 {
     public interface ICurrentUser
     {
-        Guid GetUserId();
-
-        string? GetUserEmail();
-
-        string? GetTenant();
-
-        bool IsAuthenticated();
-
-        bool IsInRole(string role);
-
-        IEnumerable<Claim>? GetUserClaims();
-
-        Guid Id { get; }
+        string UserId { get; }
 
         string UserName { get; }
 
@@ -28,7 +16,7 @@ namespace LintCoder.Application.Common.Interfaces
 
         bool EmailVerified { get; }
 
-        Guid? TenantId { get; }
+        string TenantId { get; }
 
         string[] Roles { get; }
 

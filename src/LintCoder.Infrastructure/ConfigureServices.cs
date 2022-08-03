@@ -14,7 +14,7 @@ namespace LintCoder.Infrastructure
         {
             services.AddCurrentUser();
             services.AddLCAuthorization();
-            services.AddLCAuthentication();
+            services.AddLCAuthentication(configuration);
             return services;
         }
 

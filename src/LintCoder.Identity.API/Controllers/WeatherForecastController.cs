@@ -22,7 +22,7 @@ namespace LintCoder.Identity.API.Controllers
             _logger = logger;
         }
 
-        [LCRoleAuthorize(LCRoleConstants.Basic)]
+        [LCRoleAuthorize(Policy = "LintCoderRole", Roles = LCRoleConstants.Basic)]
         [HttpGet(Name = "GetWeatherForecast")]
         //[IgnoreApiLog]
         public IEnumerable<WeatherForecast> Get()

@@ -78,7 +78,7 @@ namespace LintCoder.Identity.API.Middlewares
             {
                 ClientIpAddress = context?.Connection?.RemoteIpAddress?.ToString(),
                 Url = url,
-                UserId = currentUser.GetUserId(),
+                UserId = currentUser.UserId,
                 UserName = currentUser.UserName,
                 ApplicationName = "LintCoder.Idenitty.API",
                 CorrelationId = "",

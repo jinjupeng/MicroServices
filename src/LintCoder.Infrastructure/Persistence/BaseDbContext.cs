@@ -43,12 +43,12 @@ namespace LintCoder.Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Modified:
-                        entry.Entity.ModifiedBy = Convert.ToString(currentUser.GetUserId());
+                        entry.Entity.ModifiedBy = Convert.ToString(currentUser.UserId);
                         entry.Entity.ModifiedName = currentUser.UserName;
                         entry.Entity.ModifiedTime = dateTime;
                         break;
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = currentUser.GetUserId().ToString();
+                        entry.Entity.CreatedBy = currentUser.UserId;
                         entry.Entity.CreatedName = currentUser.UserName;
                         entry.Entity.CreatedTime = dateTime;
                         break;

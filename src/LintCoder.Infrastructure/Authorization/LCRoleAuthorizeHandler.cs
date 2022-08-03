@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using LintCoder.Infrastructure.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Routing;
-using System.Security.Claims;
 
 namespace LintCoder.Infrastructure.Authorization
 {
@@ -11,11 +11,11 @@ namespace LintCoder.Infrastructure.Authorization
             var endpoint = context.Resource as RouteEndpoint;
             var lcRoleAttribute = endpoint?.Metadata.GetMetadata<LCRoleAuthorizeAttribute>();
 
-            if (!context.User.HasClaim(x => x.Type == ClaimTypes.Role))
+            if (!context.User.HasClaim(x => x.Type == LintCoderClaims.Role))
                 return Task.CompletedTask;
 
             var claim = context.User
-                .Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role);
+                .Claims.FirstOrDefault(x => x.Type == LintCoderClaims.Role);
             var role = claim?.Value ?? "";
 
             var allowRoles = requirement.AllowRoles;

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using LintCoder.Infrastructure.Authentation.JwtBearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -9,34 +10,32 @@ namespace LintCoder.Infrastructure.Auth.JwtBearer
     /// <summary>
     /// 扩展
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class JwtExtensions
     {
-        public static IServiceCollection AddJwtOptions(this IServiceCollection services, Action<JwtOptions> jwtOptions)
+        public static IServiceCollection AddJwtOptions(this IServiceCollection services, Action<JwtSettings> jwtSettings)
         {
-            if (jwtOptions == null)
+            if (jwtSettings == null)
             {
-                throw new ArgumentNullException(nameof(jwtOptions));
+                throw new ArgumentNullException(nameof(jwtSettings));
             }
-            services.Configure(jwtOptions);
-            services.AddSingleton<JwtHelper>();
+            services.Configure(jwtSettings);
 
             return services;
         }
 
         public static IServiceCollection AddJwtOptions(this IServiceCollection services, IConfiguration configuration)
         {
-            var jwtOptionsConfig = configuration.GetSection(nameof(JwtOptions));
-            services.Configure<JwtOptions>(jwtOptionsConfig);
-            services.AddSingleton<JwtHelper>();
+            var jwtSettings = configuration.GetSection(nameof(JwtSettings));
+            services.Configure<JwtSettings>(jwtSettings);
 
             return services;
         }
 
 
-        public static IServiceCollection AddLCAuthentication(this IServiceCollection services)
+        public static IServiceCollection AddLCAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
-            var jwtOptions = services.BuildServiceProvider().GetRequiredService<IOptions<JwtOptions>>().Value;
-            var jwtHelper = services.BuildServiceProvider().GetService<JwtHelper>();
+            services.AddJwtOptions(configuration);
+            var jwtSettings = services.BuildServiceProvider().GetRequiredService<IOptions<JwtSettings>>().Value;
 
             services.AddAuthentication(s =>
             {
@@ -48,7 +47,7 @@ namespace LintCoder.Infrastructure.Auth.JwtBearer
                 // 添加JwtBearer验证服务：
                 .AddJwtBearer(options =>
                 {
-                    options.TokenValidationParameters = jwtHelper.GenarateTokenValidationParameters();
+                    options.TokenValidationParameters = JwtHelpers.GenarateTokenValidationParameters(jwtSettings);
                     options.Events = new JwtBearerEvents
                     {
                         OnAuthenticationFailed = context =>
@@ -62,6 +61,7 @@ namespace LintCoder.Infrastructure.Auth.JwtBearer
                         },
                         OnTokenValidated = (context) =>
                         {
+                            var user = context.Principal;
                             return Task.CompletedTask;
                         }
                     };

@@ -1,28 +1,24 @@
-﻿using System.Security.Claims;
+﻿
 
 namespace LintCoder.Infrastructure.Users
 {
     public static class LintCoderClaims
     {
         /// <summary>
-        /// Default: <see cref="ClaimTypes.Name"/>
         /// </summary>
-        public static string UserName { get; set; } = ClaimTypes.Name;
+        public static string UserName { get; set; } ="user_name";
 
         /// <summary>
-        /// Default: <see cref="ClaimTypes.NameIdentifier"/>
         /// </summary>
-        public static string UserId { get; set; } = ClaimTypes.NameIdentifier;
+        public static string UserId { get; set; } = "user_id";
 
         /// <summary>
-        /// Default: <see cref="ClaimTypes.Role"/>
         /// </summary>
-        public static string Role { get; set; } = ClaimTypes.Role;
+        public static string Role { get; set; } = "role";
 
         /// <summary>
-        /// Default: <see cref="ClaimTypes.Email"/>
         /// </summary>
-        public static string Email { get; set; } = ClaimTypes.Email;
+        public static string Email { get; set; } = "email";
 
         /// <summary>
         /// Default: "full_name".
@@ -57,13 +53,7 @@ namespace LintCoder.Infrastructure.Users
         /// <summary>
         /// Default: "tenantid".
         /// </summary>
-        public static string TenantId { get; set; } = "tenantid";
-
-
-        /// <summary>
-        /// Default: "editionid".
-        /// </summary>
-        public static string EditionId { get; set; } = "editionid";
+        public static string TenantId { get; set; } = "tenant_id";
 
         /// <summary>
         /// Default: "client_id".

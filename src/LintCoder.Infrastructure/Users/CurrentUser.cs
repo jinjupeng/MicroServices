@@ -3,54 +3,40 @@ using System.Security.Claims;
 
 namespace LintCoder.Infrastructure.Users 
 { 
-
     public class CurrentUser : ICurrentUser, ICurrentUserInitializer
     {
         private ClaimsPrincipal? _user;
 
-        public string? Name => _user?.Identity?.Name;
+        public string UserId => _user?.GetUserId();
 
-        public Guid? Id => throw new NotImplementedException();
+        public string UserName => _user?.GetFullName();
 
-        public string UserName => throw new NotImplementedException();
+        public string PhoneNumber => _user?.GetPhoneNumber();
 
-        public string PhoneNumber => throw new NotImplementedException();
+        public bool PhoneNumberVerified => (bool)(_user?.GetPhoneNumberVerified());
 
-        public bool PhoneNumberVerified => throw new NotImplementedException();
+        public string Email => _user?.GetEmail();
 
-        public string Email => throw new NotImplementedException();
+        public bool EmailVerified => (bool)(_user?.GetEmailVerified());
 
-        public bool EmailVerified => throw new NotImplementedException();
+        public string TenantId => _user?.GetTenant();
 
-        public Guid? TenantId => throw new NotImplementedException();
+        public string[] Roles => _user?.GetRoles();
 
-        public string[] Roles => throw new NotImplementedException();
+        public Claim FindClaim(string claimType)
+        {
+            return _user.Claims.FirstOrDefault(x => x.Type == claimType) ?? null;
+        }
 
-        Guid ICurrentUser.Id => throw new NotImplementedException();
+        public Claim[] FindClaims(string claimType)
+        {
+            return _user.Claims.Where(x => x.Type == claimType).ToArray();
+        }
 
-        private Guid _userId = Guid.Empty;
-
-        public Guid GetUserId() =>
-            IsAuthenticated()
-                ? Guid.Parse(_user?.GetUserId() ?? Guid.Empty.ToString())
-                : _userId;
-
-        public string? GetUserEmail() =>
-            IsAuthenticated()
-                ? _user!.GetEmail()
-                : string.Empty;
-
-        public bool IsAuthenticated() =>
-            _user?.Identity?.IsAuthenticated is true;
-
-        public bool IsInRole(string role) =>
-            _user?.IsInRole(role) is true;
-
-        public IEnumerable<Claim>? GetUserClaims() =>
-            _user?.Claims;
-
-        public string? GetTenant() =>
-            IsAuthenticated() ? _user?.GetTenant() : string.Empty;
+        public Claim[] GetAllClaims()
+        {
+            return _user.Claims.ToArray();
+        }
 
         public void SetCurrentUser(ClaimsPrincipal user)
         {
@@ -60,34 +46,6 @@ namespace LintCoder.Infrastructure.Users
             }
 
             _user = user;
-        }
-
-        public void SetCurrentUserId(string userId)
-        {
-            if (_userId != Guid.Empty)
-            {
-                throw new Exception("Method reserved for in-scope initialization");
-            }
-
-            if (!string.IsNullOrEmpty(userId))
-            {
-                _userId = Guid.Parse(userId);
-            }
-        }
-
-        public Claim FindClaim(string claimType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Claim[] FindClaims(string claimType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Claim[] GetAllClaims()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -18,10 +18,10 @@ namespace LintCoder.Shared.Authorization
                     return;
                 }
 
-                var userContext = httpContext.RequestServices.GetService<ICurrentUser>();
+                var currentUser = httpContext.RequestServices.GetService<ICurrentUser>();
                 // 请求Url
                 var requestPermission = httpContext.Request.Path.Value.ToLower().Replace("/api", "");
-                var result = await CheckUserPermissions(long.Parse(userContext.Id.ToString()), new List<string> { requestPermission }, userContext.Roles);
+                var result = await CheckUserPermissions(long.Parse(currentUser.UserId), new List<string> { requestPermission }, currentUser.Roles);
                 if (result)
                 {
                     context.Succeed(requirement);

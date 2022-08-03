@@ -1,10 +1,10 @@
-﻿using Common.Utility.Extensions;
-using System.Diagnostics.CodeAnalysis;
+﻿
 
-namespace LintCoder.Infrastructure.Auth.JwtBearer
+using Common.Utility.Extensions;
+
+namespace LintCoder.Infrastructure.Authentation.JwtBearer
 {
-    [ExcludeFromCodeCoverage]
-    public class JwtOptions
+    public class JwtSettings
     {
         /// <summary>
         /// 证书颁发者

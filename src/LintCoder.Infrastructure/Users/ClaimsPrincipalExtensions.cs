@@ -4,6 +4,36 @@ namespace LintCoder.Infrastructure.Users
 {
     public static class ClaimsPrincipalExtensions
     {
+        public static bool GetPhoneNumberVerified(this ClaimsPrincipal principal)
+        {
+            var claimValue = principal.FindFirstValue(LintCoderClaims.PhoneNumberVerified);
+            if (string.IsNullOrEmpty(claimValue))
+            {
+                return false;
+            }
+            return bool.Parse(claimValue);
+        }
+
+        public static bool GetEmailVerified(this ClaimsPrincipal principal)
+        {
+            var claimValue = principal.FindFirstValue(LintCoderClaims.EmailVerified);
+            if (string.IsNullOrEmpty(claimValue))
+            {
+                return false;
+            }
+            return bool.Parse(claimValue);
+        }
+
+        public static string[] GetRoles(this ClaimsPrincipal principal)
+        {
+            var claimValue = principal.FindFirstValue(LintCoderClaims.Role);
+            if (string.IsNullOrEmpty(claimValue))
+            {
+                return Array.Empty<string>();
+            }
+            return claimValue.Split(",");
+        }
+
         public static string? GetEmail(this ClaimsPrincipal principal)
             => principal.FindFirstValue(ClaimTypes.Email);
 

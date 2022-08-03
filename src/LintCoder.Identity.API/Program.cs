@@ -1,5 +1,6 @@
 using CSRedis;
 using FluentValidation;
+using LintCoder.Application;
 using LintCoder.Identity.API.Application.Behaviors;
 using LintCoder.Identity.API.Application.Models.Enum;
 using LintCoder.Identity.API.Application.Models.Response;
@@ -94,7 +95,7 @@ builder.Host.UseNLog();
 builder.Services.AddScoped<IdentityDbContextInitialiser>();
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
-
+builder.Services.AddApplicationServices();
 
 #region
 
@@ -128,7 +129,8 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseHttpsRedirection();
 app.UseCors(MyAllowSpecificOrigins);
 
-app.UseStatusCodePages(context => {
+app.UseStatusCodePages(context =>
+{
     var response = context.HttpContext.Response;
     if (response.StatusCode == (int)HttpStatusCode.Unauthorized)
     {
