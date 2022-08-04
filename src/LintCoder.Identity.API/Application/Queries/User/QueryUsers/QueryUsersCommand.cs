@@ -12,7 +12,7 @@ namespace LintCoder.Identity.API.Application.Queries.User.GetUsers
 
         public string UserName { get; set; }
 
-        public long? OrgId { get; set; }
+        public string? OrgId { get; set; }
 
         public bool? Enabled { get; set; }
 

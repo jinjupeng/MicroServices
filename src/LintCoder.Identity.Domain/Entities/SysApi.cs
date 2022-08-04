@@ -1,19 +1,24 @@
 ﻿using LintCoder.Domain.Common;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LintCoder.Identity.Domain.Entities
 {
-    public class SysApi : BaseEntity
+    public class SysApi : BaseEntity<string>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public new long Id { get; set; }
+        public SysApi()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
 
         [Required]
-        public long ApiPid { get; set; }
+        [MaxLength(36)]
+        public string TenantId { get; set; }
 
         [Required]
+        public string ApiPid { get; set; }
+
+        [Required]
+        [MaxLength(256)]
         public string ApiPids { get; set; }
 
         [Required]

@@ -29,7 +29,7 @@ namespace LintCoder.Identity.API.Application.Queries.Menu.QueryMenuTree
                          join y in dbContext.SysRoleMenu.AsNoTracking() on x.Id equals y.MenuId
                          join z in dbContext.SysUserRole.AsNoTracking() on y.RoleId equals z.RoleId
                          join m in dbContext.SysUser.AsNoTracking() on z.UserId equals m.Id
-                         where m.Id == long.Parse(userContext.UserId)
+                         where m.Id == userContext.UserId
                          where x.Status == true // 启用
                          select new SysMenuNode
                          {
@@ -40,7 +40,7 @@ namespace LintCoder.Identity.API.Application.Queries.Menu.QueryMenuTree
                              Icon = x.Icon
                          };
             var sysMenuNodeList = await sysMenuNodeQuery.ToListAsync();
-            var result = DataTree<SysMenuNode, long>.BuildTreeWithoutRoot(sysMenuNodeList, default);
+            var result = DataTree<SysMenuNode, string>.BuildTreeWithoutRoot(sysMenuNodeList, default);
             return MsgModel.Success(result);
         }
     }

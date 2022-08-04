@@ -8,7 +8,7 @@
 
         public string Portrait { get; set; }
 
-        public long OrgId { get; set; }
+        public string OrgId { get; set; }
 
         public bool Enabled { get; set; }
 

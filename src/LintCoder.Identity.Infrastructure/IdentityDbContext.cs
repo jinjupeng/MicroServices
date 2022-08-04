@@ -8,7 +8,7 @@ namespace LintCoder.Identity.Infrastructure
 {
     public class IdentityDbContext : BaseDbContext
     {
-        public IdentityDbContext(DbContextOptions<IdentityDbContext> options, ICurrentUser userContext) : base(options, userContext)
+        public IdentityDbContext(DbContextOptions<IdentityDbContext> options, ICurrentUser currentUser) : base(options, currentUser)
         {
         }
 
@@ -24,20 +24,23 @@ namespace LintCoder.Identity.Infrastructure
         public DbSet<SysUser> SysUser { get; set; }
         public DbSet<SysUserRole> SysUserRole { get; set; }
 
+        public DbSet<TenantInfo> TenantInfo { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new SysApiEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SysConfigEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SysDictEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SysMenuEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SysOrgEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SysRoleApiEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SysRoleEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SysRoleMenuEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SysUserEntityTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new SysUserRoleEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new SysApiEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new SysConfigEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new SysDictEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new SysMenuEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new SysOrgEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new SysRoleApiEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new SysRoleEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new SysRoleMenuEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new SysUserEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new SysUserRoleEntityTypeConfiguration(currentUser));
+            modelBuilder.ApplyConfiguration(new TenantInfoEntityTypeConfiguration());
 
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

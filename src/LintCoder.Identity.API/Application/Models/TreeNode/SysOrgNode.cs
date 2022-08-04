@@ -3,15 +3,15 @@ using LintCoder.Identity.Domain.Entities;
 
 namespace LintCoder.Identity.API.Application.Models.TreeNode
 {
-    public class SysOrgNode : SysOrg, IDataTree<SysOrgNode, long>
+    public class SysOrgNode : SysOrg, IDataTree<SysOrgNode, string>
     {
         public List<SysOrgNode> Children { get; set; }
-        public long GetId()
+        public string GetId()
         {
             return Id;
         }
 
-        public long GetParentId()
+        public string GetParentId()
         {
             return OrgPid;
         }

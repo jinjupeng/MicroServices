@@ -7,13 +7,13 @@
         /// </summary>
         /// <param name="roleIds"></param>
         /// <returns></returns>
-        Task<List<string>> GetAllApiOfRoleAsync(List<long> roleIds);
+        Task<List<string>> GetAllApiOfRoleAsync(List<string> roleIds);
 
         /// <summary>
         /// 根据用户ID获取用户所属角色权限
         /// </summary>
         /// <param name="userIds"></param>
         /// <returns></returns>
-        Task<List<string>> GetAllApiOfUserAsync(List<long> userIds);
+        Task<List<string>> GetAllApiOfUserAsync(List<string> userIds);
     }
 }

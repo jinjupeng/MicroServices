@@ -1,14 +1,18 @@
 ﻿using LintCoder.Domain.Common;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LintCoder.Identity.Domain.Entities
 {
-    public partial class SysConfig : BaseEntity
+    public partial class SysConfig : BaseEntity<string>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public new long Id { get; set; }
+        public SysConfig()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
+        [Required]
+        [MaxLength(36)]
+        public string TenantId { get; set; }
 
         [Required]
         [MaxLength(64)]

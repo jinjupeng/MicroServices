@@ -46,7 +46,7 @@ namespace LintCoder.Identity.API.Application.Commands.User.CreateUser
         /// 组织id
         /// </summary>
         [DataMember]
-        public long OrgId { get; set; }
+        public string OrgId { get; set; }
 
         /// <summary>
         /// 0无效用户，1是有效用户

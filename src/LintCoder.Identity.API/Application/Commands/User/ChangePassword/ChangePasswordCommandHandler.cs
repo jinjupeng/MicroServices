@@ -20,7 +20,7 @@ namespace LintCoder.Identity.API.Application.Commands.User.ChangePassword
 
         public async Task<MsgModel> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
         {
-            var currentUser = await dbContext.SysUser.FirstOrDefaultAsync(x => x.Id == long.Parse(userContext.UserId));
+            var currentUser = await dbContext.SysUser.FirstOrDefaultAsync(x => x.Id == userContext.UserId);
             if (currentUser == null)
             {
                 return MsgModel.Fail("用户不存在！");

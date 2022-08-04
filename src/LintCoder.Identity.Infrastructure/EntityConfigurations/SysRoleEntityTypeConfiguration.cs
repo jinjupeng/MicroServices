@@ -1,4 +1,5 @@
-﻿using LintCoder.Identity.Domain.Entities;
+﻿using LintCoder.Application.Common.Interfaces;
+using LintCoder.Identity.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -6,13 +7,19 @@ namespace LintCoder.Identity.Infrastructure.EntityConfigurations
 {
     internal class SysRoleEntityTypeConfiguration : IEntityTypeConfiguration<SysRole>
     {
+        private readonly ICurrentUser currentUser;
+        public SysRoleEntityTypeConfiguration(ICurrentUser currentUser)
+        {
+            this.currentUser = currentUser;
+        }
         public void Configure(EntityTypeBuilder<SysRole> builder)
         {
             builder.ToTable(nameof(SysRole));
 
             builder.HasKey(user => user.Id);
+            builder.HasIndex(user => new { user.Id, user.TenantId });
 
-            builder.Property(user => user.Id).ValueGeneratedOnAdd();
+            builder.HasQueryFilter(x => x.TenantId == currentUser.TenantId);
         }
     }
 }

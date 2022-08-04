@@ -4,8 +4,8 @@ namespace ApiServer.Models.Model.Nodes
 {
     public class UserRoleCheckedIds
     {
-        public long UserId { get; set; }
+        public string UserId { get; set; }
 
-        public List<long> CheckedIds { get; set; }
+        public List<string> CheckedIds { get; set; }
     }
 }

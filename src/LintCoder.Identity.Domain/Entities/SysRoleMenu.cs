@@ -1,19 +1,23 @@
 ﻿using LintCoder.Domain.Common;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LintCoder.Identity.Domain.Entities
 {
-    public partial class SysRoleMenu : BaseEntity
+    public partial class SysRoleMenu : BaseEntity<string>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public new long Id { get; set; }
+        public SysRoleMenu()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
 
         [Required]
-        public long RoleId { get; set; }
+        [MaxLength(36)]
+        public string TenantId { get; set; }
 
         [Required]
-        public long MenuId { get; set; }
+        public string RoleId { get; set; }
+
+        [Required]
+        public string MenuId { get; set; }
     }
 }

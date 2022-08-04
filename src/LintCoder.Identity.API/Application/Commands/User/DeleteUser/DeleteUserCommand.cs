@@ -5,6 +5,6 @@ namespace LintCoder.Identity.API.Application.Commands.User.DeleteUser
 {
     public class DeleteUserCommand : IRequest<MsgModel>
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
     }
 }

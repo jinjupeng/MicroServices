@@ -29,9 +29,22 @@ namespace LintCoder.Identity.API.Application.Commands.Account.Login
 
         public async Task<MsgModel> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
+            if(string.IsNullOrWhiteSpace(request.TenantId) || string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
+            {
+                return MsgModel.Fail("参数为空！");
+            }
+            var tenantInfo = await dbContext.TenantInfo.AsNoTracking().FirstOrDefaultAsync(x => x.Id == request.TenantId);
+            if(tenantInfo == null)
+            {
+                return MsgModel.Fail("租户信息不存在！");
+            }
+            if(tenantInfo.IsActive == false)
+            {
+                return MsgModel.Fail("租户未激活，请联系管理员！");
+            }
             // 加密登陆密码
             string encodePassword = PasswordEncoder.Encode(request.Password);
-            var loginUser = await dbContext.SysUser.AsNoTracking().FirstOrDefaultAsync(x => x.UserName == request.UserName && x.Password == encodePassword);
+            var loginUser = await dbContext.SysUser.AsNoTracking().FirstOrDefaultAsync(x => x.TenantId == request.TenantId && x.UserName == request.UserName && x.Password == encodePassword);
             if(loginUser == null)
             {
                 return MsgModel.Fail("用户名或密码不正确！");
@@ -41,14 +54,16 @@ namespace LintCoder.Identity.API.Application.Commands.Account.Login
                 return MsgModel.Fail("账户已被禁用！");
             }
             var userRoleList = await dbContext.SysUserRole.AsNoTracking().Where(x => x.UserId == loginUser.Id).Select(x => x.RoleId).ToListAsync();
-            var roleNameList = await dbContext.SysRole.AsNoTracking().Where(x => userRoleList.Contains(x.Id)).Select(x => x.RoleName).ToListAsync();
+            var roleNameList = await dbContext.SysRole.AsNoTracking().Where(x => userRoleList.Contains(x.Id)).Select(x => x.RoleCode).ToListAsync();
             var tokenRequest = new TokenRequest
             {
                 UserId = loginUser.Id.ToString(),
                 UserName = loginUser.UserName,
-                TennantId = "",
+                TennantId = loginUser.TenantId,
                 Email = loginUser.Email,
-                PhoneNumber = "",
+                IsEmailConfirmed = loginUser.IsEmailConfirmed,
+                PhoneNumber = loginUser.Phone,
+                PhoneNumberVerified = loginUser.IsEmailConfirmed,
                 Roles = roleNameList
             };
             var token = JwtHelpers.CreateAccessToken(tokenRequest, options.Value);

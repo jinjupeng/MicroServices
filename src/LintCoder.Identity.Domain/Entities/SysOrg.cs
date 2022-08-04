@@ -1,20 +1,24 @@
 ﻿using LintCoder.Domain.Common;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LintCoder.Identity.Domain.Entities
 {
-    public partial class SysOrg : BaseEntity
+    public partial class SysOrg : BaseEntity<string>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public new long Id { get; set; }
+        public SysOrg()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
 
         [Required]
-        public long OrgPid { get; set; }
+        [MaxLength(36)]
+        public string TenantId { get; set; }
 
         [Required]
-        [MaxLength(128)]
+        public string OrgPid { get; set; }
+
+        [Required]
+        [MaxLength(256)]
         public string OrgPids { get; set; }
 
         [Required]

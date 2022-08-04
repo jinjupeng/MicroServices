@@ -4,7 +4,8 @@ namespace LintCoder.Domain.Common
 {
     public class BaseEntity<TKey> : IEntity
     {
-        [Required]
+        [Key]
+        [MaxLength(36)]
         public TKey Id { get; set; }
 
         /// <summary>

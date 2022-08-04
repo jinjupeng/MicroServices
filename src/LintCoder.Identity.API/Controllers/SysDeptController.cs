@@ -23,7 +23,7 @@ namespace LintCoder.Identity.API.Controllers
         /// <param name="id">部门ID</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAsync([FromRoute] long id)
+        public async Task<ActionResult> DeleteAsync([FromRoute] string id)
         {
             var result = await _sender.Send(new DeleteDeptCommand { Id = id });
             return Ok(result);
@@ -36,7 +36,7 @@ namespace LintCoder.Identity.API.Controllers
         /// <param name="updateDeptCommand"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync([FromRoute] long id, [FromBody] UpdateDeptCommand updateDeptCommand)
+        public async Task<IActionResult> UpdateAsync([FromRoute] string id, [FromBody] UpdateDeptCommand updateDeptCommand)
         {
             var result = await _sender.Send(updateDeptCommand);
             return Ok(result);

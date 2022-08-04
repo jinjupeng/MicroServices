@@ -19,9 +19,10 @@ namespace LintCoder.Identity.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("Login")]
-        public async Task<IActionResult> LoginAsync([FromBody] LoginCommand loginCommand)
+        [HttpPost("Login/{tenantId}")]
+        public async Task<IActionResult> LoginAsync([FromRoute] string tenantId, [FromBody] LoginCommand loginCommand)
         {
+            loginCommand.TenantId = tenantId;
             var result = await _sender.Send(loginCommand);
             return Ok(result);
         }

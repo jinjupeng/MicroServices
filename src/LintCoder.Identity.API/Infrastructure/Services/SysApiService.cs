@@ -22,7 +22,7 @@ namespace LintCoder.Identity.API.Infrastructure.Services
             _baseSysUserRoleService = baseSysUserRoleService;
         }
 
-        public async Task<List<string>> GetAllApiOfRoleAsync(List<long> roleIds)
+        public async Task<List<string>> GetAllApiOfRoleAsync(List<string> roleIds)
         {
             var sysRoleList = await _baseSysRoleService.GetModels(x => x.Status == false && roleIds.Contains(x.Id)).ToListAsync(); // 获取未禁用的角色
             var roleIdList = sysRoleList.Select(x => x.Id).Distinct();
@@ -33,7 +33,7 @@ namespace LintCoder.Identity.API.Infrastructure.Services
             return sysApiList.Select(x => x.Url).ToList();
         }
 
-        public async Task<List<string>> GetAllApiOfUserAsync(List<long> userIds)
+        public async Task<List<string>> GetAllApiOfUserAsync(List<string> userIds)
         {
             var sysUserRoleList = await _baseSysUserRoleService.GetModels(x => userIds.Contains(x.UserId)).ToListAsync();
             var roleIds = sysUserRoleList.Select(x => x.Id).Distinct().ToList();

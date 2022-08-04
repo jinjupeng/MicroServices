@@ -54,7 +54,7 @@ namespace LintCoder.Identity.API.Controllers
         /// <param name="updateUserRequest">用户信息</param>
         /// <returns></returns>
         [HttpPut("{id}/Update")]
-        public async Task<IActionResult> UpdateAsync([FromRoute] long id, [FromBody] UpdateUserRequest updateUserRequest)
+        public async Task<IActionResult> UpdateAsync([FromRoute] string id, [FromBody] UpdateUserRequest updateUserRequest)
         {
             var result = await _sender.Send(new UpdateUserCommand { Id = id, UpdateUserRequest = updateUserRequest});
             return Ok(result);
@@ -66,7 +66,7 @@ namespace LintCoder.Identity.API.Controllers
         /// <param name="id">用户id</param>
         /// <returns></returns>
         [HttpDelete("{id}/Delete")]
-        public async Task<IActionResult> DeleteAsync([FromRoute] long id)
+        public async Task<IActionResult> DeleteAsync([FromRoute] string id)
         {
             var result = await _sender.Send(new DeleteUserCommand { Id = id });
             return Ok(result);

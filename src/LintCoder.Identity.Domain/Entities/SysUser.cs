@@ -1,14 +1,18 @@
 ﻿using LintCoder.Domain.Common;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LintCoder.Identity.Domain.Entities
 {
-    public partial class SysUser : BaseEntity
+    public partial class SysUser : BaseEntity<string>
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public new long Id { get; set; }
+        public SysUser()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
+        [Required]
+        [MaxLength(36)]
+        public string TenantId { get; set; }
 
         [Required]
         [MaxLength(64)]
@@ -25,13 +29,19 @@ namespace LintCoder.Identity.Domain.Entities
         public string Portrait { get; set; }
 
         [Required]
-        public long OrgId { get; set; }
+        public string OrgId { get; set; }
 
         [Required]
         public bool Enabled { get; set; }
 
         [MaxLength(16)]
         public string Phone { get; set; }
+
+        [Required]
+        public bool EmailVerified { get; set; }
+
+        [Required]
+        public bool IsEmailConfirmed { get; set; }
 
         [MaxLength(32)]
         public string Email { get; set; }

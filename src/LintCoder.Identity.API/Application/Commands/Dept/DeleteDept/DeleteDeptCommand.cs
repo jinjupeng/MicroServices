@@ -5,6 +5,6 @@ namespace LintCoder.Identity.API.Application.Commands.Dept.DeleteDept
 {
     public class DeleteDeptCommand : IRequest<MsgModel>
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
     }
 }

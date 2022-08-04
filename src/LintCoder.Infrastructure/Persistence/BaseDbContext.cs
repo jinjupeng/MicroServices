@@ -6,7 +6,7 @@ namespace LintCoder.Infrastructure.Persistence
 {
     public class BaseDbContext : DbContext
     {
-        private readonly ICurrentUser currentUser;
+        protected readonly ICurrentUser currentUser;
 
         public BaseDbContext(DbContextOptions options, ICurrentUser currentUser) : base(options)
         {
@@ -43,13 +43,13 @@ namespace LintCoder.Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Modified:
-                        entry.Entity.ModifiedBy = Convert.ToString(currentUser.UserId);
+                        entry.Entity.ModifiedBy = currentUser.UserId;
                         entry.Entity.ModifiedName = currentUser.UserName;
                         entry.Entity.ModifiedTime = dateTime;
                         break;
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = currentUser.UserId;
-                        entry.Entity.CreatedName = currentUser.UserName;
+                        entry.Entity.CreatedBy = entry.Entity.CreatedBy ?? currentUser.UserId;
+                        entry.Entity.CreatedName = entry.Entity.CreatedName ?? currentUser.UserName;
                         entry.Entity.CreatedTime = dateTime;
                         break;
                 }

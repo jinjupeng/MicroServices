@@ -21,7 +21,7 @@ namespace LintCoder.Shared.Authorization
                 var currentUser = httpContext.RequestServices.GetService<ICurrentUser>();
                 // 请求Url
                 var requestPermission = httpContext.Request.Path.Value.ToLower().Replace("/api", "");
-                var result = await CheckUserPermissions(long.Parse(currentUser.UserId), new List<string> { requestPermission }, currentUser.Roles);
+                var result = await CheckUserPermissions(currentUser.UserId, new List<string> { requestPermission }, currentUser.Roles);
                 if (result)
                 {
                     context.Succeed(requirement);
@@ -31,6 +31,6 @@ namespace LintCoder.Shared.Authorization
             context.Fail();
         }
 
-        protected abstract Task<bool> CheckUserPermissions(long userId, IEnumerable<string> requestPermissions, IEnumerable<string> userBelongsRoleIds);
+        protected abstract Task<bool> CheckUserPermissions(string userId, IEnumerable<string> requestPermissions, IEnumerable<string> userBelongsRoleIds);
     }
 }
