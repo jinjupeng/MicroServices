@@ -1,3 +1,4 @@
+using AgileConfig.Client;
 using CSRedis;
 using FluentValidation;
 using LintCoder.Application;
@@ -36,6 +37,9 @@ IConfigurationRoot config = new ConfigurationBuilder()
 ConfigSettingLayoutRenderer.DefaultConfiguration = config;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// ÒýÈëAgileConfigÅäÖÃÏî
+builder.Host.UseAgileConfig(new ConfigClient($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json"), e => Console.WriteLine($"configs {e.Action}"));
 
 // Add services to the container.
 

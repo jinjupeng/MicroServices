@@ -51,7 +51,7 @@ namespace LintCoder.Identity.Infrastructure
             var tenantId = Guid.NewGuid().ToString();
             var createdBy = "1297873308628307970";
             var createdName = "admin";
-            if (!_context.SysUser.Any())
+            if (!_context.SysUser.IgnoreQueryFilters().Any())
             {
                 _context.TenantInfo.Add(new TenantInfo
                 {
