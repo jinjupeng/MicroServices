@@ -39,7 +39,7 @@ ConfigSettingLayoutRenderer.DefaultConfiguration = config;
 var builder = WebApplication.CreateBuilder(args);
 
 // ÒýÈëAgileConfigÅäÖÃÏî
-builder.Host.UseAgileConfig(new ConfigClient($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json"), e => Console.WriteLine($"configs {e.Action}"));
+// builder.Host.UseAgileConfig(new ConfigClient($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json"), e => Console.WriteLine($"configs {e.Action}"));
 
 // Add services to the container.
 

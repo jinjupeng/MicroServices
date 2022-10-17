@@ -122,7 +122,7 @@ namespace LintCoder.Infrastructure.Authentation.JwtBearer
             var tokenHandler = new JwtSecurityTokenHandler();
             var result = tokenHandler.ValidateToken(token, parameters, out var securityToken);
             if (result?.Identity?.IsAuthenticated != true)
-                return null;
+                return Enumerable.Empty<Claim>();
             return result.Claims.Where(x => x.Type == JwtRegisteredClaimNames.Jti);
         }
     }

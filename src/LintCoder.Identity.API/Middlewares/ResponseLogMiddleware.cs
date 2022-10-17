@@ -1,7 +1,9 @@
-﻿using LintCoder.Identity.API.Infrastructure.Attributes;
+﻿using Elasticsearch.Net;
+using LintCoder.Identity.API.Infrastructure.Attributes;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.IO;
 using System.Text;
+using System.Text.Json;
 
 namespace LintCoder.Identity.API.Middlewares
 {
@@ -40,15 +42,20 @@ namespace LintCoder.Identity.API.Middlewares
 
             if (apiLogAttribute == null || ignoreApiLogAttribute != null)
             {
-                _logger.LogInformation(
-                    $"LogId:{(string)context.Items["ApiLogId"]} " +
-                    $"Schema:{context.Request.Scheme} " +
-                    $"Host: {context.Request.Host.ToUriComponent()} " +
-                    $"Path: {context.Request.Path} " +
-                    $"QueryString: {context.Request.QueryString} " +
-                    $"ResponseHeader: {GetHeaders(context.Response.Headers)} " +
-                    $"ResponseBody: {responseBodyTxt}" +
-                    $"ResponseStatus: {context.Response.StatusCode}");
+                var apiLogId = context.Items["ApiLogId"] ?? "";
+                var apiLogInfo = new ApiLogInfo 
+                {
+                    LogId = Convert.ToString(apiLogId) ?? "",
+                    Scheme = context.Request.Scheme,
+                    Host = context.Request.Host.ToUriComponent(),
+                    Path = context.Request.Path,
+                    QueryString = context.Request.QueryString.Value ?? "",
+                    RequestHeader = GetHeaders(context.Response.Headers),
+                    RequestBody = responseBodyTxt,
+                    ResponseStatus = context.Response.StatusCode
+                };
+
+                _logger.LogInformation(JsonSerializer.Serialize(apiLogInfo));
             }
         }
 

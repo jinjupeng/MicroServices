@@ -118,6 +118,8 @@ namespace LintCoder.Identity.API.Middlewares
         public string RequestHeader { get; set; }
 
         public string RequestBody { get; set; }
+
+        public int ResponseStatus { get; set; }
     }
 
     /// <summary>
