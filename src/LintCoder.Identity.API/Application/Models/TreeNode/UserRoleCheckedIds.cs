@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ApiServer.Models.Model.Nodes
+﻿namespace ApiServer.Models.Model.Nodes
 {
     public class UserRoleCheckedIds
     {

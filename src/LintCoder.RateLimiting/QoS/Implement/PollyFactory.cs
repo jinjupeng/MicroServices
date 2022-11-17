@@ -66,7 +66,7 @@ namespace LintCoder.RateLimiting.QoS.Implement
             IAsyncPolicy policy = Policy.NoOpAsync();
             if (breakConfig != null)
             {
-                policy = policy.WrapAsync(Policy.Handle<TimeoutException>()
+                policy = policy.WrapAsync(Policy.Handle<TimeoutException>() // 如果想要触发超时异常，在请求接口中必须传递CancellationToken参数
                     .Or<TimeoutRejectedException>()
                     .Or<BrokenCircuitException>()
                     .Or<ThrottlException>()

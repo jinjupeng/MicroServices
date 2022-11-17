@@ -10,16 +10,16 @@ namespace LintCoder.Application.Common.Models
 
         public string TennantId { get; set; }
 
-        public string ImageUrl { get;set; }
+        public string ImageUrl { get; set; }
 
-        public IEnumerable<string> Roles { get;set;} 
+        public IEnumerable<string> Roles { get; set; }
 
-        public string Email { get;set; }
+        public string Email { get; set; }
 
         public bool IsEmailConfirmed { get; set; } = false;
 
-        public string PhoneNumber { get;set; }
+        public string PhoneNumber { get; set; }
 
-        public bool PhoneNumberVerified { get;set; } = false;
+        public bool PhoneNumberVerified { get; set; } = false;
     }
 }

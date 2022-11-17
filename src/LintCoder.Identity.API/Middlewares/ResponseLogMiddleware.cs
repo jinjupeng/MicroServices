@@ -1,5 +1,4 @@
-﻿using Elasticsearch.Net;
-using LintCoder.Identity.API.Infrastructure.Attributes;
+﻿using LintCoder.Identity.API.Infrastructure.Attributes;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.IO;
 using System.Text;
@@ -43,7 +42,7 @@ namespace LintCoder.Identity.API.Middlewares
             if (apiLogAttribute == null || ignoreApiLogAttribute != null)
             {
                 var apiLogId = context.Items["ApiLogId"] ?? "";
-                var apiLogInfo = new ApiLogInfo 
+                var apiLogInfo = new ApiLogInfo
                 {
                     LogId = Convert.ToString(apiLogId) ?? "",
                     Scheme = context.Request.Scheme,

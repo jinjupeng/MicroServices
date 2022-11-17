@@ -1,8 +1,6 @@
 ﻿using LintCoder.RateLimiting.QoS.Config;
 using Polly;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LintCoder.RateLimiting.QoS
 {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LintCoder.Identity.Domain.Exceptions
+﻿namespace LintCoder.Identity.Domain.Exceptions
 {
     public abstract class ApplicationException : Exception
     {

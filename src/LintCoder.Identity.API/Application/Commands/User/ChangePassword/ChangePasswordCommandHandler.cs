@@ -27,18 +27,18 @@ namespace LintCoder.Identity.API.Application.Commands.User.ChangePassword
             }
             var encodeOldPassword = PasswordEncoder.Encode(request.OldPassword);
             var encodeNewPassword = PasswordEncoder.Encode(request.NewPassword);
-            if(currentUser.Password != encodeOldPassword)
+            if (currentUser.Password != encodeOldPassword)
             {
                 return MsgModel.Fail("密码不正确！");
             }
-            if(encodeOldPassword == encodeNewPassword)
+            if (encodeOldPassword == encodeNewPassword)
             {
                 return MsgModel.Fail("新密码和旧密码不能相同！");
             }
             currentUser.Password = encodeNewPassword;
             dbContext.Update(currentUser);
             var result = await dbContext.SaveChangesAsync();
-            if(result > 0)
+            if (result > 0)
             {
                 return MsgModel.Success("密码修改成功！");
             }

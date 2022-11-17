@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LintCoder.Identity.API.Application.Models.TreeNode
+﻿namespace LintCoder.Identity.API.Application.Models.TreeNode
 {
     public class RoleCheckedIds
     {

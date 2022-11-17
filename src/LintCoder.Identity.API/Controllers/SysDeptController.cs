@@ -2,7 +2,6 @@
 using LintCoder.Identity.API.Application.Commands.Dept.DeleteDept;
 using LintCoder.Identity.API.Application.Commands.Dept.UpdateDept;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LintCoder.Identity.API.Controllers

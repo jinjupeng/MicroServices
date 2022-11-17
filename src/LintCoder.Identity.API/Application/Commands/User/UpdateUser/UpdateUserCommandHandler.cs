@@ -25,13 +25,13 @@ namespace LintCoder.Identity.API.Application.Commands.User.UpdateUser
         public async Task<MsgModel> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
             var user = await _baseRepository.GetEntityAsync(x => x.Id == request.Id);
-            if(user == null)
+            if (user == null)
             {
                 return MsgModel.Fail("更新用户不存在");
             }
             var updateUser = request.UpdateUserRequest.Adapt(user);
             await _baseRepository.UpdateAsync(updateUser, cancellationToken);
-            if(await _baseRepository.SaveChangesAsync() > 0)
+            if (await _baseRepository.SaveChangesAsync() > 0)
             {
                 return MsgModel.Success("更新成功");
             }

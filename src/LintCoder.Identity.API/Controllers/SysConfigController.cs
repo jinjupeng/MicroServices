@@ -1,7 +1,6 @@
 ﻿using LintCoder.Identity.API.Application.Queries.Config.QueryConfig;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LintCoder.Identity.API.Controllers

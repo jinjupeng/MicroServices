@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Routing;
 
 namespace LintCoder.Infrastructure.Authorization
 {
@@ -20,7 +19,7 @@ namespace LintCoder.Infrastructure.Authorization
             {
                 lcRoleAttribute = endpoint?.Metadata.GetMetadata<LCRoleAuthorizeAttribute>();
             }
-            if(context.Resource is AuthorizationFilterContext mvcContext)
+            if (context.Resource is AuthorizationFilterContext mvcContext)
             {
                 lcRoleAttribute = mvcContext.HttpContext.GetEndpoint()?.Metadata.GetMetadata<LCRoleAuthorizeAttribute>();
             }

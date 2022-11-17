@@ -56,7 +56,7 @@ namespace LintCoder.Identity.API.Controllers
         [HttpPut("{id}/Update")]
         public async Task<IActionResult> UpdateAsync([FromRoute] string id, [FromBody] UpdateUserRequest updateUserRequest)
         {
-            var result = await _sender.Send(new UpdateUserCommand { Id = id, UpdateUserRequest = updateUserRequest});
+            var result = await _sender.Send(new UpdateUserCommand { Id = id, UpdateUserRequest = updateUserRequest });
             return Ok(result);
         }
 

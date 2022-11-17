@@ -1,10 +1,9 @@
 ﻿using LintCoder.Identity.API.Application.Models.Response;
-using LintCoder.Identity.Domain.Entities;
 using MediatR;
 using System.Runtime.Serialization;
 
 namespace LintCoder.Identity.API.Application.Commands.User.CreateUser
-{    
+{
     // DDD and CQRS patterns comment: Note that it is recommended to implement immutable Commands
     // In this case, its immutability is achieved by having all the setters as private
     // plus only being able to update the data just once, when creating the object through its constructor.

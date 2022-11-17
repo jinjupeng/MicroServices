@@ -1,7 +1,4 @@
-﻿using Castle.DynamicProxy;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace LintCoder.Shared.Auditing
+﻿namespace LintCoder.Shared.Auditing
 {
     public static class AuditingExtensions
     {

@@ -9,7 +9,6 @@ using LintCoder.RateLimiting.QoS.Services;
 using LintCoder.RateLimiting.QoS.Services.Implement;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 using System;
 
 namespace Microsoft.Extensions.DependencyInjection

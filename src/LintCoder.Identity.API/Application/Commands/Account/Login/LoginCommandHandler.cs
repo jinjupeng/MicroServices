@@ -29,27 +29,27 @@ namespace LintCoder.Identity.API.Application.Commands.Account.Login
 
         public async Task<MsgModel> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            if(string.IsNullOrWhiteSpace(request.TenantId) || string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
+            if (string.IsNullOrWhiteSpace(request.TenantId) || string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
             {
                 return MsgModel.Fail("参数为空！");
             }
             var tenantInfo = await dbContext.TenantInfo.AsNoTracking().FirstOrDefaultAsync(x => x.Id == request.TenantId);
-            if(tenantInfo == null)
+            if (tenantInfo == null)
             {
                 return MsgModel.Fail("租户信息不存在！");
             }
-            if(tenantInfo.IsActive == false)
+            if (tenantInfo.IsActive == false)
             {
                 return MsgModel.Fail("租户未激活，请联系管理员！");
             }
             // 加密登陆密码
             string encodePassword = PasswordEncoder.Encode(request.Password);
             var loginUser = await dbContext.SysUser.AsNoTracking().FirstOrDefaultAsync(x => x.TenantId == request.TenantId && x.UserName == request.UserName && x.Password == encodePassword);
-            if(loginUser == null)
+            if (loginUser == null)
             {
                 return MsgModel.Fail("用户名或密码不正确！");
             }
-            if(loginUser.Enabled == false)
+            if (loginUser.Enabled == false)
             {
                 return MsgModel.Fail("账户已被禁用！");
             }

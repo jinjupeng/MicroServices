@@ -24,12 +24,12 @@ namespace LintCoder.Identity.API.Application.Commands.User.DeleteUser
         public async Task<MsgModel> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             var user = await _baseRepository.GetEntityAsync(x => x.Id == request.Id);
-            if(user == null)
+            if (user == null)
             {
                 return MsgModel.Fail("用户不存在，无法删除！");
             }
             _baseRepository.Remove(user);
-            if(await _baseRepository.SaveChangesAsync() > 0)
+            if (await _baseRepository.SaveChangesAsync() > 0)
             {
                 return MsgModel.Success("删除成功！");
             }

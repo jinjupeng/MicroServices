@@ -1,4 +1,3 @@
-using AgileConfig.Client;
 using CSRedis;
 using FluentValidation;
 using LintCoder.Application;
@@ -43,7 +42,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddJsonOptions(options => {
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
     // 以驼峰命名方式序列化字段
     options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 });
@@ -52,9 +52,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<IdentityDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), optionsSqlServer => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), optionsSqlServer =>
+    {
         optionsSqlServer.MigrationsAssembly(typeof(Program).GetTypeInfo().Assembly.GetName().Name);
-    })); 
+    }));
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 builder.Services.AddTransient<RequestLogMiddleware>();
 builder.Services.AddTransient<ResponseLogMiddleware>();

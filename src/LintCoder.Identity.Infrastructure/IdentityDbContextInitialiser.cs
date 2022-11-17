@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using LintCoder.Identity.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using LintCoder.Identity.Domain.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace LintCoder.Identity.Infrastructure
 {
@@ -180,7 +180,7 @@ namespace LintCoder.Identity.Infrastructure
                     TenantId = tenantId,
                     MenuPid = "2",
                     MenuPids = "[0],[1],[2]",
-                    IsLeaf= true,
+                    IsLeaf = true,
                     MenuName = "菜单管理",
                     Url = "/home/sysmenu",
                     Icon = "",

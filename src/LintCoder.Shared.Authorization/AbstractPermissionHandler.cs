@@ -13,7 +13,7 @@ namespace LintCoder.Shared.Authorization
             {
                 var authHeader = httpContext.Request.Headers["Authorization"].ToString();
                 if (authHeader != null && authHeader.StartsWith("Bearer"))
-                { 
+                {
                     context.Succeed(requirement);
                     return;
                 }

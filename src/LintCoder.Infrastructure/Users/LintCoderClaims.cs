@@ -6,7 +6,7 @@ namespace LintCoder.Infrastructure.Users
     {
         /// <summary>
         /// </summary>
-        public static string UserName { get; set; } ="user_name";
+        public static string UserName { get; set; } = "user_name";
 
         /// <summary>
         /// </summary>

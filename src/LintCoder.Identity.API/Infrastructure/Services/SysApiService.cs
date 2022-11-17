@@ -11,8 +11,8 @@ namespace LintCoder.Identity.API.Infrastructure.Services
         private readonly IBaseRepository<SysRole> _baseSysRoleService;
         private readonly IBaseRepository<SysUserRole> _baseSysUserRoleService;
 
-        public SysApiService(IBaseRepository<SysApi> baseService, 
-            IBaseRepository<SysRoleApi> baseSysRoleApiService, 
+        public SysApiService(IBaseRepository<SysApi> baseService,
+            IBaseRepository<SysRoleApi> baseSysRoleApiService,
             IBaseRepository<SysRole> baseSysRoleService,
             IBaseRepository<SysUserRole> baseSysUserRoleService)
         {

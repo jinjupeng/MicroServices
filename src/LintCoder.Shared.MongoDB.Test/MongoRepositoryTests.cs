@@ -3,9 +3,6 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Threading;
-using Xunit;
 
 namespace LintCoder.Shared.MongoDB.Test
 {

@@ -1,8 +1,8 @@
 ﻿using LintCoder.Application.Common.Interfaces;
 using System.Security.Claims;
 
-namespace LintCoder.Infrastructure.Users 
-{ 
+namespace LintCoder.Infrastructure.Users
+{
     public class CurrentUser : ICurrentUser, ICurrentUserInitializer
     {
         private ClaimsPrincipal? _user;

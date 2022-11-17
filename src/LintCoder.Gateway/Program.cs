@@ -1,6 +1,5 @@
 using NLog.Web;
 using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
 
 var builder = WebApplication.CreateBuilder(args);

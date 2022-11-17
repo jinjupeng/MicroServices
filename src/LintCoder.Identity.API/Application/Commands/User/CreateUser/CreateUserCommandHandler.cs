@@ -30,14 +30,14 @@ namespace LintCoder.Identity.API.Application.Commands.User.CreateUser
         public async Task<MsgModel> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var sysUser = request.Adapt<SysUser>();
-            if(await _baseRepository.IsExistAsync(x => x.UserName == sysUser.UserName))
+            if (await _baseRepository.IsExistAsync(x => x.UserName == sysUser.UserName))
             {
                 return MsgModel.Fail("登录名重复，新增失败！");
             }
             var sysConfig = await dbContext.SysConfig.AsNoTracking().FirstOrDefaultAsync(x => x.ParamKey == "user.init.password");
             sysUser.Password = PasswordEncoder.Encode(sysConfig == null ? "123456" : sysConfig.ParamValue);
             await dbContext.SysUser.AddAsync(sysUser);
-            if(await dbContext.SaveChangesAsync() > 0)
+            if (await dbContext.SaveChangesAsync() > 0)
             {
                 return MsgModel.Success("新增成功");
             }

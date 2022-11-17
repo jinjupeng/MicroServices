@@ -18,8 +18,8 @@ namespace LintCoder.Identity.API.Application.Queries.Config.QueryConfig
         }
         public async Task<MsgModel> Handle(QueryConfigCommand request, CancellationToken cancellationToken)
         {
-            var configList = await dbContext.SysConfig.AsNoTracking().Where(x => 
-                string.IsNullOrWhiteSpace(request.Keyword) 
+            var configList = await dbContext.SysConfig.AsNoTracking().Where(x =>
+                string.IsNullOrWhiteSpace(request.Keyword)
                 || x.ParamKey.Contains(request.Keyword)
                 || x.ParamValue.Contains(request.Keyword)
             ).ToListAsync();

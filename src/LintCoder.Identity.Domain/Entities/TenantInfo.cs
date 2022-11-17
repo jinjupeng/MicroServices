@@ -9,7 +9,7 @@ namespace LintCoder.Identity.Domain.Entities
             Id = Guid.NewGuid().ToString();
         }
 
-        public string TennantName { get;set;}
+        public string TennantName { get; set; }
 
         public bool IsActive { get; set; }
     }
